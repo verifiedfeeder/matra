@@ -4,7 +4,7 @@ const ASSETS = [
   './index.html',
   './drugs.json',
   './manifest.json',
-  './matra.png',
+  './icons/matra.ico',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap'
 ];
 

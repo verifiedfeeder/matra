@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matra | High-Precision Calculator</title>
+    <title>PediDose | High-Precision Calculator</title>
     <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" type="image/x-icon" href="icons/matra.ico">
+    <link rel="icon" type="image/x-icon" href="icons/matra.ico">
+    <link rel="apple-touch-icon" href="icons/matra.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -585,40 +588,44 @@
             }
 
             // Dose calculation
-            let targetMg = indication.dose * weight;
+            // Standardize units to base (mg, U, or mcg)
+            let doseValue = indication.dose;
+            let displayUnit = indication.unit.split('/')[0]; // mg, U, or mcg
+            
+            let targetAmount = doseValue * weight;
             let freqDivisor = 1;
             
             // Handle per day vs per dose
             if (indication.unit.includes('/day')) {
-                const freqMap = { 'OD': 1, 'BD': 2, 'TDS': 3, 'QDS': 4, 'PRN': 1 };
+                const freqMap = { 'OD': 1, 'BD': 2, 'TDS': 3, 'QDS': 4, 'PRN': 1, 'CONT': 1 };
                 freqDivisor = freqMap[indication.frequency] || 1;
-                targetMg = targetMg / freqDivisor;
+                targetAmount = targetAmount / freqDivisor;
             }
 
-            // Safety Guardrails
-            if (indication.maxSingleDose && targetMg > indication.maxSingleDose) {
-                targetMg = indication.maxSingleDose;
-                warnings.push(`Capped at Max Single Dose (${indication.maxSingleDose}mg).`);
+            // Safety Guardrails (Comparison works regardless of unit if data is consistent)
+            if (indication.maxSingleDose && targetAmount > indication.maxSingleDose) {
+                targetAmount = indication.maxSingleDose;
+                warnings.push(`Capped at Max Single Dose (${indication.maxSingleDose}${displayUnit}).`);
             }
 
-            const totalDailyMg = targetMg * freqDivisor;
-            if (indication.maxDailyDose && totalDailyMg > indication.maxDailyDose) {
-                // Adjust single dose if daily max is exceeded
-                targetMg = indication.maxDailyDose / freqDivisor;
-                warnings.push(`Capped at Max Daily Dose (${indication.maxDailyDose}mg).`);
+            const totalDailyAmount = targetAmount * freqDivisor;
+            if (indication.maxDailyDose && totalDailyAmount > indication.maxDailyDose) {
+                targetAmount = indication.maxDailyDose / freqDivisor;
+                warnings.push(`Capped at Max Daily Dose (${indication.maxDailyDose}${displayUnit}).`);
             }
 
-            const preciseMl = targetMg / formulation.concentration;
+            // Volume calculation: targetAmount (mg/U/mcg) / concentration (mg/ml, U/ml, mcg/ml)
+            const preciseMl = targetAmount / formulation.concentration;
             const practical = roundToPractical(preciseMl);
 
-            renderUI(drug, indication, formulation, targetMg, preciseMl, practical, warnings);
+            renderUI(drug, indication, formulation, targetAmount, preciseMl, practical, warnings, displayUnit);
         }
 
-        function renderUI(drug, indication, formulation, mg, ml, practical, warnings) {
+        function renderUI(drug, indication, formulation, amount, ml, practical, warnings, unit) {
             elements.resDrugName.textContent = drug.drugName.toUpperCase();
             elements.resIndication.textContent = indication.label;
             elements.resTargetDose.textContent = `${indication.dose} ${indication.unit}`;
-            elements.resCalcMg.textContent = `${mg.toFixed(1)} mg`;
+            elements.resCalcMg.textContent = `${amount.toFixed(indication.dose < 1 ? 3 : 1)} ${unit}`;
             elements.resVolMl.textContent = `${ml.toFixed(2)} ml`;
             elements.resPractical.textContent = `${practical.ml} ml (approx ${practical.tsf} TSF)`;
             elements.resFreq.textContent = indication.frequency;
