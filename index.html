@@ -101,6 +101,34 @@
         .search-container {
             position: relative;
             width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        #drug-search {
+            padding-right: 2.5rem;
+        }
+
+        .btn-clear {
+            position: absolute;
+            right: 0.75rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            padding: 0.2rem;
+            line-height: 1;
+        }
+
+        .btn-clear.active {
+            display: block;
+        }
+
+        .btn-clear:hover {
+            color: var(--accent-color);
         }
 
         #search-results {
@@ -112,13 +140,28 @@
             border: 1px solid var(--accent-color);
             border-top: none;
             z-index: 100;
-            max-height: 200px;
+            max-height: 300px;
             overflow-y: auto;
             display: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
         #search-results.active {
             display: block;
+        }
+
+        /* Custom Scrollbar for search results */
+        #search-results::-webkit-scrollbar {
+            width: 6px;
+        }
+        #search-results::-webkit-scrollbar-track {
+            background: var(--surface-color);
+        }
+        #search-results::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+        }
+        #search-results::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
         }
 
         .search-item {
@@ -183,9 +226,10 @@
 
         .result-card {
             border: 2px solid var(--accent-color);
-            padding: 1.5rem;
-            background: rgba(204, 255, 0, 0.05);
+            padding: 0;
+            background: var(--surface-color);
             display: none;
+            overflow: hidden;
         }
 
         .result-card.active {
@@ -193,50 +237,159 @@
         }
 
         .result-header {
+            background: rgba(204, 255, 0, 0.1);
+            padding: 1rem 1.5rem;
             font-family: var(--font-mono);
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            margin-bottom: 1rem;
             color: var(--accent-color);
-            border-bottom: 1px solid var(--accent-color);
-            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            font-family: var(--font-mono);
+        .result-body {
+            padding: 1.5rem;
         }
 
-        .result-label {
+        .primary-result {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .primary-label {
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
-        .result-value {
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .highlight {
-            font-size: 1.5rem;
+        .primary-value {
+            font-size: 2.2rem;
             color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-weight: bold;
+            line-height: 1;
         }
 
-        .warning-block {
-            border: 1px solid var(--warning-color);
-            padding: 1rem;
-            color: var(--warning-color);
+        .secondary-value {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
             font-family: var(--font-mono);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .notes-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-color);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .notes-label {
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: bold;
+        }
+
+        .notes-content {
             font-size: 0.85rem;
-            margin-top: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .brands-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
             display: none;
         }
 
-        .warning-block.active {
+        .brands-section.active {
             display: block;
+        }
+
+        .brands-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .brand-item {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.02);
+            transition: border-color 0.2s;
+        }
+
+        .brand-item:hover {
+            border-color: var(--accent-color);
+        }
+
+        .brand-name {
+            color: var(--accent-color);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .brand-meta {
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+        }
+
+        .brand-price {
+            color: var(--text-primary);
         }
 
         .btn-copy {
@@ -248,10 +401,9 @@
             font-family: var(--font-mono);
             font-weight: bold;
             cursor: pointer;
-            margin-top: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: opacity 0.2s;
+            transition: transform 0.1s, opacity 0.2s;
         }
 
         .btn-copy:hover {
@@ -259,12 +411,41 @@
         }
 
         .btn-copy:active {
-            transform: translateY(1px);
+            transform: scale(0.98);
+        }
+
+        .warning-block {
+            border: 1px solid var(--warning-color);
+            padding: 1rem;
+            color: var(--warning-color);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: none;
+            background: rgba(255, 127, 80, 0.05);
+        }
+
+        .warning-block.active {
+            display: block;
         }
 
         select option {
             background-color: var(--surface-color);
             color: var(--text-primary);
+        }
+
+        /* Custom Scrollbar */
+        .brands-grid::-webkit-scrollbar {
+            width: 4px;
+        }
+        .brands-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .brands-grid::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+        }
+        .brands-grid::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
         }
 
         @media (max-width: 480px) {
@@ -286,19 +467,19 @@
             <div class="grid-inputs">
                 <div class="input-group">
                     <label>Years</label>
-                    <input type="number" id="age-y" value="0" min="0" max="18">
+                    <input type="number" id="age-y" placeholder="0" min="0" max="18">
                 </div>
                 <div class="input-group">
                     <label>Months</label>
-                    <input type="number" id="age-m" value="0" min="0" max="11">
+                    <input type="number" id="age-m" placeholder="0" min="0" max="11">
                 </div>
                 <div class="input-group">
                     <label>Weeks</label>
-                    <input type="number" id="age-w" value="0" min="0" max="4">
+                    <input type="number" id="age-w" placeholder="0" min="0" max="4">
                 </div>
                 <div class="input-group">
                     <label>Days</label>
-                    <input type="number" id="age-d" value="0" min="0" max="31">
+                    <input type="number" id="age-d" placeholder="0" min="0" max="31">
                 </div>
             </div>
             <div class="weight-input-container">
@@ -316,6 +497,7 @@
                 <label>Drug Name</label>
                 <div class="search-container">
                     <input type="text" id="drug-search" placeholder="Type to search drugs..." autocomplete="off">
+                    <button type="button" class="btn-clear" id="btn-clear" title="Clear search">&times;</button>
                     <div id="search-results"></div>
                 </div>
             </div>
@@ -339,35 +521,50 @@
             
             <div id="result-card" class="result-card">
                 <div class="result-header" id="res-drug-name">PARACETAMOL</div>
-                <div class="result-row">
-                    <span class="result-label">Indication</span>
-                    <span class="result-value" id="res-indication">Fever</span>
+                <div class="result-body">
+                    <div class="primary-result">
+                        <span class="primary-label">Practical Dose</span>
+                        <div class="primary-value" id="res-practical">3.25 ml</div>
+                        <div class="secondary-value" id="res-tsf">(approx 3/4 TSF)</div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Indication</span>
+                            <span class="info-value" id="res-indication">Fever</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Frequency</span>
+                            <span class="info-value" id="res-freq">TDS</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Target Dose</span>
+                            <span class="info-value" id="res-target-dose">15 mg/kg</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Calculated</span>
+                            <span class="info-value" id="res-calc-mg">150 mg</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Precise Volume</span>
+                            <span class="info-value" id="res-vol-ml">3.12 ml</span>
+                        </div>
+                    </div>
+
+                    <div class="notes-box">
+                        <span class="notes-label">Clinical Notes</span>
+                        <div class="notes-content" id="res-note">Take after food</div>
+                    </div>
+
+                    <div id="brands-section" class="brands-section">
+                        <div class="brands-title">Available Brands (BD Market)</div>
+                        <div id="brands-grid" class="brands-grid">
+                            <!-- Brands populated by JS -->
+                        </div>
+                    </div>
+
+                    <button class="btn-copy" id="btn-copy">Copy Prescription</button>
                 </div>
-                <div class="result-row">
-                    <span class="result-label">Target Dose</span>
-                    <span class="result-value" id="res-target-dose">15 mg/kg</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Calculated Dose</span>
-                    <span class="result-value" id="res-calc-mg">150 mg</span>
-                </div>
-                <div class="result-row" style="margin-top: 1rem;">
-                    <span class="result-label">Volume (Precise)</span>
-                    <span class="result-value highlight" id="res-vol-ml">3.12 ml</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Practical Dose</span>
-                    <span class="result-value highlight" id="res-practical">3.25 ml (approx 3/4 TSF)</span>
-                </div>
-                <div class="result-row" style="margin-top: 1rem;">
-                    <span class="result-label">Frequency</span>
-                    <span class="result-value" id="res-freq">TDS (Three times daily)</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Notes</span>
-                    <span class="result-value" id="res-note" style="max-width: 60%;">Take after food</span>
-                </div>
-                <button class="btn-copy" id="btn-copy">Copy Prescription</button>
             </div>
         </section>
     </div>
@@ -385,6 +582,7 @@
             weight: document.getElementById('weight'),
             weightBadge: document.getElementById('weight-badge-container'),
             drugSearch: document.getElementById('drug-search'),
+            btnClear: document.getElementById('btn-clear'),
             searchResults: document.getElementById('search-results'),
             indicationList: document.getElementById('indication-list'),
             formulationList: document.getElementById('formulation-list'),
@@ -398,14 +596,20 @@
             resCalcMg: document.getElementById('res-calc-mg'),
             resVolMl: document.getElementById('res-vol-ml'),
             resPractical: document.getElementById('res-practical'),
+            resTsf: document.getElementById('res-tsf'),
             resFreq: document.getElementById('res-freq'),
             resNote: document.getElementById('res-note'),
+            brandsSection: document.getElementById('brands-section'),
+            brandsGrid: document.getElementById('brands-grid'),
         };
 
         async function loadDatabase() {
             try {
                 const response = await fetch('drugs.json');
                 drugData = await response.json();
+                
+                // Sort drugData alphabetically by drugName
+                drugData.sort((a, b) => a.drugName.localeCompare(b.drugName));
             } catch (error) {
                 console.error('Error loading drug database:', error);
                 elements.warningBox.textContent = "CRITICAL ERROR: Failed to load drug database.";
@@ -416,21 +620,43 @@
         function filterDrugs(query) {
             elements.searchResults.innerHTML = '';
             focusedSearchIndex = -1;
+            
+            let filtered = [];
             if (!query) {
-                elements.searchResults.classList.remove('active');
-                return;
+                // If query is empty, show all drugs for scrolling
+                filtered = drugData.map((drug, index) => ({ drug, index }));
+            } else {
+                // Filter based on drugName OR brand names
+                const q = query.toLowerCase();
+                filtered = drugData
+                    .map((drug, index) => {
+                        const matchesName = drug.drugName.toLowerCase().includes(q);
+                        const matchingBrands = (drug.brands || [])
+                            .filter(b => b.name.toLowerCase().includes(q))
+                            .map(b => b.name);
+                        
+                        return { 
+                            drug, 
+                            index, 
+                            matchesName, 
+                            matchingBrand: matchingBrands.length > 0 ? matchingBrands[0] : null 
+                        };
+                    })
+                    .filter(item => item.matchesName || item.matchingBrand);
             }
-
-            const filtered = drugData
-                .map((drug, index) => ({ drug, index }))
-                .filter(item => item.drug.drugName.toLowerCase().includes(query.toLowerCase()));
 
             if (filtered.length > 0) {
                 filtered.forEach((item, i) => {
                     const div = document.createElement('div');
                     div.className = 'search-item';
                     div.id = `search-item-${i}`;
-                    div.textContent = item.drug.drugName;
+                    
+                    if (item.matchingBrand && !item.matchesName) {
+                        div.innerHTML = `${item.drug.drugName} <span class="hint" style="color: var(--accent-color); font-size: 0.7rem; display: block;">Brand match: ${item.matchingBrand}</span>`;
+                    } else {
+                        div.textContent = item.drug.drugName;
+                    }
+                    
                     div.addEventListener('click', () => selectDrug(item.index));
                     elements.searchResults.appendChild(div);
                 });
@@ -445,6 +671,7 @@
             const drug = drugData[index];
             elements.drugSearch.value = drug.drugName;
             elements.searchResults.classList.remove('active');
+            elements.btnClear.classList.add('active');
             
             // Populate Indications
             elements.indicationList.innerHTML = '<option value="">-- Select Indication --</option>';
@@ -587,21 +814,18 @@
             }
 
             // Dose calculation
-            // Standardize units to base (mg, U, or mcg)
             let doseValue = indication.dose;
             let displayUnit = indication.unit.split('/')[0]; // mg, U, or mcg
             
             let targetAmount = doseValue * weight;
             let freqDivisor = 1;
             
-            // Handle per day vs per dose
             if (indication.unit.includes('/day')) {
                 const freqMap = { 'OD': 1, 'BD': 2, 'TDS': 3, 'QDS': 4, 'PRN': 1, 'CONT': 1 };
                 freqDivisor = freqMap[indication.frequency] || 1;
                 targetAmount = targetAmount / freqDivisor;
             }
 
-            // Safety Guardrails (Comparison works regardless of unit if data is consistent)
             if (indication.maxSingleDose && targetAmount > indication.maxSingleDose) {
                 targetAmount = indication.maxSingleDose;
                 warnings.push(`Capped at Max Single Dose (${indication.maxSingleDose}${displayUnit}).`);
@@ -613,22 +837,103 @@
                 warnings.push(`Capped at Max Daily Dose (${indication.maxDailyDose}${displayUnit}).`);
             }
 
-            // Volume calculation: targetAmount (mg/U/mcg) / concentration (mg/ml, U/ml, mcg/ml)
-            const preciseMl = targetAmount / formulation.concentration;
-            const practical = roundToPractical(preciseMl);
+            // Formulation type handling
+            const isLiquid = ['syrup', 'suspension', 'drops', 'solution', 'infusion', 'injection'].some(t => formulation.type.toLowerCase().includes(t));
+            const isSolid = ['tablet', 'capsule', 'suppository', 'sachet', 'pessary'].some(t => formulation.type.toLowerCase().includes(t));
 
-            renderUI(drug, indication, formulation, targetAmount, preciseMl, practical, warnings, displayUnit);
+            let resultData = {
+                precise: "",
+                practical: "",
+                secondary: "",
+                isLiquid: isLiquid
+            };
+
+            if (isLiquid) {
+                const preciseMl = targetAmount / formulation.concentration;
+                const practical = roundToPractical(preciseMl);
+                resultData.precise = `${preciseMl.toFixed(2)} ml`;
+                resultData.practical = `${practical.ml} ml`;
+                resultData.secondary = `(approx ${practical.tsf} TSF)`;
+            } else if (isSolid) {
+                // For solids, formulation.concentration is usually mg/tablet
+                const tablets = targetAmount / formulation.concentration;
+                resultData.precise = `${tablets.toFixed(2)} ${formulation.type}(s)`;
+                
+                // Practical rounding for tablets (1/4, 1/2, 1)
+                const whole = Math.floor(tablets);
+                const dec = tablets - whole;
+                let frac = "";
+                if (dec < 0.125) frac = "";
+                else if (dec < 0.375) frac = "1/4";
+                else if (dec < 0.625) frac = "1/2";
+                else if (dec < 0.875) frac = "3/4";
+                else frac = "1";
+
+                let practicalLabel = "";
+                if (frac === "1") practicalLabel = (whole + 1).toString();
+                else if (whole === 0) practicalLabel = frac || "0";
+                else practicalLabel = frac ? `${whole} ${frac}` : whole.toString();
+
+                resultData.practical = `${practicalLabel} ${formulation.type}(s)`;
+                resultData.secondary = `Precise: ${tablets.toFixed(3)}`;
+            } else {
+                // Fallback for unknown types
+                resultData.precise = targetAmount.toFixed(1) + " " + displayUnit;
+                resultData.practical = "Review formulation";
+            }
+
+            renderUI(drug, indication, formulation, targetAmount, resultData, warnings, displayUnit);
         }
 
-        function renderUI(drug, indication, formulation, amount, ml, practical, warnings, unit) {
+        function renderUI(drug, indication, formulation, amount, resultData, warnings, unit) {
             elements.resDrugName.textContent = drug.drugName.toUpperCase();
             elements.resIndication.textContent = indication.label;
             elements.resTargetDose.textContent = `${indication.dose} ${indication.unit}`;
             elements.resCalcMg.textContent = `${amount.toFixed(indication.dose < 1 ? 3 : 1)} ${unit}`;
-            elements.resVolMl.textContent = `${ml.toFixed(2)} ml`;
-            elements.resPractical.textContent = `${practical.ml} ml (approx ${practical.tsf} TSF)`;
+            
+            // Update Labels and Values based on type
+            const practicalLabel = document.querySelector('.primary-label');
+            const preciseLabel = document.querySelector('.info-item:last-child .info-label');
+            
+            practicalLabel.textContent = resultData.isLiquid ? "Practical Dose" : "Practical Quantity";
+            preciseLabel.textContent = resultData.isLiquid ? "Precise Volume" : "Precise Units";
+
+            elements.resPractical.textContent = resultData.practical;
+            elements.resTsf.textContent = resultData.secondary;
+            elements.resVolMl.textContent = resultData.precise;
+
             elements.resFreq.textContent = indication.frequency;
             elements.resNote.textContent = indication.note || "N/A";
+
+            // Render Brands
+            elements.brandsGrid.innerHTML = '';
+            if (drug.brands && drug.brands.length > 0) {
+                // Sort brands by price ascending
+                const sortedBrands = [...drug.brands].sort((a, b) => {
+                    const priceA = parseFloat(a.price.replace(/[^\d.]/g, '')) || 0;
+                    const priceB = parseFloat(b.price.replace(/[^\d.]/g, '')) || 0;
+                    return priceA - priceB;
+                });
+
+                sortedBrands.forEach(brand => {
+                    const brandEl = document.createElement('div');
+                    brandEl.className = 'brand-item';
+                    brandEl.innerHTML = `
+                        <div class="brand-name">
+                            <span>${brand.name}</span>
+                            <span class="brand-price">${brand.price}</span>
+                        </div>
+                        <div class="brand-meta">
+                            <span>${brand.form} | ${brand.strength}</span>
+                            <span>${brand.manufacturer}</span>
+                        </div>
+                    `;
+                    elements.brandsGrid.appendChild(brandEl);
+                });
+                elements.brandsSection.classList.add('active');
+            } else {
+                elements.brandsSection.classList.remove('active');
+            }
 
             if (warnings.length > 0) {
                 elements.warningBox.innerHTML = warnings.join('<br>');
@@ -643,13 +948,39 @@
         // Event Listeners
         elements.drugSearch.addEventListener('input', (e) => {
             filterDrugs(e.target.value);
-            if (e.target.value === '') {
-                selectedDrugIndex = -1;
-                elements.indicationList.disabled = true;
-                elements.formulationList.disabled = true;
-                calculateLogic();
+            if (e.target.value) {
+                elements.btnClear.classList.add('active');
+            } else {
+                elements.btnClear.classList.remove('active');
+                // Don't clear search logic here anymore, let user scroll
+                filterDrugs(''); 
             }
         });
+
+        elements.drugSearch.addEventListener('focus', () => {
+            filterDrugs(elements.drugSearch.value);
+        });
+
+        elements.drugSearch.addEventListener('click', () => {
+            filterDrugs(elements.drugSearch.value);
+        });
+
+        elements.btnClear.addEventListener('click', () => {
+            elements.drugSearch.value = '';
+            elements.btnClear.classList.remove('active');
+            clearSearch();
+            elements.drugSearch.focus();
+        });
+
+        function clearSearch() {
+            selectedDrugIndex = -1;
+            elements.indicationList.innerHTML = '<option value="">-- Select Indication --</option>';
+            elements.indicationList.disabled = true;
+            elements.formulationList.innerHTML = '<option value="">-- Select Formulation --</option>';
+            elements.formulationList.disabled = true;
+            elements.searchResults.classList.remove('active');
+            calculateLogic();
+        }
 
         elements.drugSearch.addEventListener('keydown', (e) => {
             const items = elements.searchResults.querySelectorAll('.search-item');
@@ -682,7 +1013,7 @@
             });
         }
 
-        document.addEventListener('click', (e) => {
+        document.addEventListener('mousedown', (e) => {
             if (!elements.drugSearch.contains(e.target) && !elements.searchResults.contains(e.target)) {
                 elements.searchResults.classList.remove('active');
             }
@@ -696,8 +1027,8 @@
             if (selectedDrugIndex === -1) return;
             const drug = drugData[selectedDrugIndex].drugName;
             const formulation = elements.formulationList.options[elements.formulationList.selectedIndex].text;
-            const ml = elements.resVolMl.textContent;
-            const tsf = elements.resPractical.textContent.split('(')[1].replace(')', '');
+            const ml = elements.resPractical.textContent;
+            const tsf = elements.resTsf.textContent.replace('(', '').replace(')', '');
             const freq = elements.resFreq.textContent;
             const ind = elements.resIndication.textContent;
 
