@@ -3,7 +3,7 @@
   "name": "Matra (মাত্রা) - Pediatric Dose Calculator",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/google/material-design-icons/master/png/action/calculate/black/512dp.png",
+      "src": "matra.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
