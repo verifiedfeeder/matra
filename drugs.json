@@ -1,0 +1,1125 @@
+[
+  {
+    "drugName": "Acetaminophen (Paracetamol) Oral",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "120mg/5ml", "concentration": 24 }],
+    "indications": [{ "label": "Analgesics / Fever", "dose": 15, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Max 4 doses in 24h.", "maxSingleDose": 1000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Acetaminophen (Paracetamol) Rectal",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "suppository", "strength": "125mg/1ml", "concentration": 125 }],
+    "indications": [{ "label": "Analgesics / Fever", "dose": 20, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Higher dose for rectal use.", "maxSingleDose": 1000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Ibuprofen",
+    "ageMinDays": 90,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/5ml", "concentration": 20 }],
+    "indications": [{ "label": "Analgesics / Inflammation", "dose": 10, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Take with food.", "maxSingleDose": 400, "maxDailyDose": 1200 }]
+  },
+  {
+    "drugName": "Morphine",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Severe Pain", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Monitor respiration.", "maxSingleDose": 10, "maxDailyDose": 40 }]
+  },
+  {
+    "drugName": "Fentanyl",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "0.05mg/1ml", "concentration": 0.05 }],
+    "indications": [{ "label": "Analgesia / Sedation", "dose": 0.001, "unit": "mg/kg/dose", "frequency": "PRN", "note": "Intensive care use.", "maxSingleDose": 0.1, "maxDailyDose": 1 }]
+  },
+  {
+    "drugName": "Aspirin (Juvenile)",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/5ml", "concentration": 20 }],
+    "indications": [{ "label": "Analgesics", "dose": 10, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Risk of Reye Syndrome.", "maxSingleDose": 500, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Diclofenac",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "25mg/5ml", "concentration": 5 }],
+    "indications": [{ "label": "Analgesics", "dose": 1, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Take with food.", "maxSingleDose": 50, "maxDailyDose": 150 }]
+  },
+  {
+    "drugName": "Nimesulide",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "50mg/5ml", "concentration": 10 }],
+    "indications": [{ "label": "Analgesics", "dose": 4, "unit": "mg/kg/dose", "frequency": "BD", "note": "Use with caution.", "maxSingleDose": 100, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Tramadol",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "50mg/1ml", "concentration": 50 }],
+    "indications": [{ "label": "Analgesics", "dose": 1, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Moderate to severe pain.", "maxSingleDose": 100, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Amoxicillin (Standard)",
+    "ageMinDays": 7,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 15, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Standard course.", "maxSingleDose": 500, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Amoxicillin (High Dose)",
+    "ageMinDays": 7,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "400mg/5ml", "concentration": 80 }],
+    "indications": [{ "label": "Antibiotics", "dose": 30, "unit": "mg/kg/dose", "frequency": "BD", "note": "For Otitis Media.", "maxSingleDose": 1000, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Co-Amoxiclav",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "457mg/5ml", "concentration": 91.4 }],
+    "indications": [{ "label": "Antibiotics", "dose": 17, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Based on Amox component.", "maxSingleDose": 500, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Ampicillin",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "1000mg/10ml", "concentration": 100 }],
+    "indications": [{ "label": "Antibiotics", "dose": 50, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Severe infections.", "maxSingleDose": 2000, "maxDailyDose": 8000 }]
+  },
+  {
+    "drugName": "Azithromycin",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/5ml", "concentration": 40 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "OD", "note": "3-5 day course.", "maxSingleDose": 500, "maxDailyDose": 500 }]
+  },
+  {
+    "drugName": "Cefotaxime",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/10ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 50, "unit": "mg/kg/dose", "frequency": "TDS", "note": "CNS infections.", "maxSingleDose": 2000, "maxDailyDose": 12000 }]
+  },
+  {
+    "drugName": "Cefixime",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/5ml", "concentration": 20 }],
+    "indications": [{ "label": "Antibiotics", "dose": 5, "unit": "mg/kg/dose", "frequency": "BD", "note": "Typhoid/UTI.", "maxSingleDose": 200, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Ceftazidime",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/10ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 75, "unit": "mg/kg/dose", "frequency": "BD", "note": "Anti-pseudomonal.", "maxSingleDose": 2000, "maxDailyDose": 6000 }]
+  },
+  {
+    "drugName": "Ceftriaxone",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "1000mg/10ml", "concentration": 100 }],
+    "indications": [
+      { "label": "Sepsis", "dose": 75, "unit": "mg/kg/dose", "frequency": "OD", "note": "Standard dose.", "maxSingleDose": 2000, "maxDailyDose": 4000 },
+      { "label": "Meningitis", "dose": 100, "unit": "mg/kg/dose", "frequency": "OD", "note": "High dose.", "maxSingleDose": 2000, "maxDailyDose": 4000 }
+    ]
+  },
+  {
+    "drugName": "Gentamicin",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "40mg/1ml", "concentration": 40 }],
+    "indications": [{ "label": "Antibiotics", "dose": 5, "unit": "mg/kg/dose", "frequency": "OD", "note": "Monitor levels.", "maxSingleDose": 300, "maxDailyDose": 300 }]
+  },
+  {
+    "drugName": "Amikacin",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/2ml", "concentration": 250 }],
+    "indications": [{ "label": "Antibiotics", "dose": 7.5, "unit": "mg/kg/dose", "frequency": "BD", "note": "Gram-negative.", "maxSingleDose": 500, "maxDailyDose": 1000 }]
+  },
+  {
+    "drugName": "Vancomycin",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/10ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 15, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Check troughs.", "maxSingleDose": 1000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Metronidazole (IV)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/100ml", "concentration": 5 }],
+    "indications": [{ "label": "Antibiotics", "dose": 7.5, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Anaerobic.", "maxSingleDose": 500, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Metronidazole (Oral)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/5ml", "concentration": 40 }],
+    "indications": [{ "label": "Antibiotics", "dose": 7.5, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Oral route.", "maxSingleDose": 400, "maxDailyDose": 1200 }]
+  },
+  {
+    "drugName": "Clindamycin",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "150mg/1ml", "concentration": 150 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Bone/Skin inf.", "maxSingleDose": 600, "maxDailyDose": 1800 }]
+  },
+  {
+    "drugName": "Cephalexin",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 25, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Skin/Soft tissue.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Cefadroxil",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 30, "unit": "mg/kg/dose", "frequency": "OD", "note": "1st gen Ceph.", "maxSingleDose": 1000, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Ciprofloxacin",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/5ml", "concentration": 40 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "BD", "note": "Anthrax/CF.", "maxSingleDose": 500, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Norfloxacin",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/5ml", "concentration": 40 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "BD", "note": "UTI.", "maxSingleDose": 400, "maxDailyDose": 800 }]
+  },
+  {
+    "drugName": "Levofloxacin",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "125mg/5ml", "concentration": 25 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "BD", "note": "Pneumonia.", "maxSingleDose": 500, "maxDailyDose": 750 }]
+  },
+  {
+    "drugName": "Doxycycline",
+    "ageMinDays": 2920,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "50mg/5ml", "concentration": 10 }],
+    "indications": [{ "label": "Antibiotics", "dose": 2.2, "unit": "mg/kg/dose", "frequency": "BD", "note": "Not for <8 yrs.", "maxSingleDose": 100, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Tetracycline",
+    "ageMinDays": 2920,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "125mg/5ml", "concentration": 25 }],
+    "indications": [{ "label": "Antibiotics", "dose": 7, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Not for <8 yrs.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Erythromycin",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "125mg/5ml", "concentration": 25 }],
+    "indications": [{ "label": "Antibiotics", "dose": 12, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Macrolide.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Chloramphenicol",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "125mg/1ml", "concentration": 125 }],
+    "indications": [{ "label": "Antibiotics", "dose": 12, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Monitor levels.", "maxSingleDose": 1000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "TMP-SMX",
+    "ageMinDays": 60,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "40mg/5ml", "concentration": 8 }],
+    "indications": [{ "label": "Antibiotics", "dose": 8, "unit": "mg/kg/dose", "frequency": "BD", "note": "Based on TMP.", "maxSingleDose": 160, "maxDailyDose": 320 }]
+  },
+  {
+    "drugName": "Sulfamethoxazole",
+    "ageMinDays": 60,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/5ml", "concentration": 40 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "BD", "note": "Sulfa component.", "maxSingleDose": 800, "maxDailyDose": 1600 }]
+  },
+  {
+    "drugName": "Sulfadiazine",
+    "ageMinDays": 60,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 25, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Toxoplasmosis.", "maxSingleDose": 1000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Nalidixic Acid",
+    "ageMinDays": 90,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 13, "unit": "mg/kg/dose", "frequency": "QDS", "note": "UTI.", "maxSingleDose": 1000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Cotrimoxazole",
+    "ageMinDays": 60,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "40mg/5ml", "concentration": 8 }],
+    "indications": [{ "label": "Antibiotics", "dose": 8, "unit": "mg/kg/dose", "frequency": "BD", "note": "TMP component.", "maxSingleDose": 160, "maxDailyDose": 320 }]
+  },
+  {
+    "drugName": "Cefpodoxime",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/5ml", "concentration": 20 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "BD", "note": "Respiratory.", "maxSingleDose": 200, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Meropenem",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/10ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 25, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Broad spectrum.", "maxSingleDose": 2000, "maxDailyDose": 6000 }]
+  },
+  {
+    "drugName": "Imipenem",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/10ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 15, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Broad spectrum.", "maxSingleDose": 1000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Gatifloxacin",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/5ml", "concentration": 40 }],
+    "indications": [{ "label": "Antibiotics", "dose": 10, "unit": "mg/kg/dose", "frequency": "OD", "note": "Quinolone.", "maxSingleDose": 400, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Cefaclav",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Antibiotics", "dose": 15, "unit": "mg/kg/dose", "frequency": "BD", "note": "Cefaclor + Clav.", "maxSingleDose": 500, "maxDailyDose": 1000 }]
+  },
+  {
+    "drugName": "Flucloxacillin",
+    "ageMinDays": 7,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Antibiotics", "dose": 22.5, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Staphylococcal.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Cefuroxime",
+    "ageMinDays": 90,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "750mg/10ml", "concentration": 75 }],
+    "indications": [{ "label": "Antibiotics", "dose": 12.5, "unit": "mg/kg/dose", "frequency": "BD", "note": "2nd gen Ceph.", "maxSingleDose": 750, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Fluconazole",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "50mg/5ml", "concentration": 10 }],
+    "indications": [{ "label": "Antifungals", "dose": 6, "unit": "mg/kg/dose", "frequency": "OD", "note": "Maintenance.", "maxSingleDose": 400, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Clotrimazole (Topical)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "cream", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Antifungals", "dose": 1, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Topical application.", "maxSingleDose": 1, "maxDailyDose": 3 }]
+  },
+  {
+    "drugName": "Miconazole (Oral)",
+    "ageMinDays": 120,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "gel", "strength": "20mg/1ml", "concentration": 20 }],
+    "indications": [{ "label": "Antifungals", "dose": 2, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Oral thrush.", "maxSingleDose": 100, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Nystatin (Oral)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "drop", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Antifungals", "dose": 5, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Oral thrush.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Ketoconazole",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/5ml", "concentration": 20 }],
+    "indications": [{ "label": "Antifungals", "dose": 5, "unit": "mg/kg/dose", "frequency": "OD", "note": "Systemic fungi.", "maxSingleDose": 200, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Amphotericin B",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "10mg/10ml", "concentration": 1 }],
+    "indications": [{ "label": "Antifungals", "dose": 0.5, "unit": "mg/kg/dose", "frequency": "OD", "note": "Severe infections.", "maxSingleDose": 50, "maxDailyDose": 50 }]
+  },
+  {
+    "drugName": "Acyclovir",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/5ml", "concentration": 40 }],
+    "indications": [{ "label": "Antivirals", "dose": 10, "unit": "mg/kg/dose", "frequency": "QDS", "note": "HSV/VZV.", "maxSingleDose": 800, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Oseltamivir (Tamiflu)",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "30mg/5ml", "concentration": 6 }],
+    "indications": [{ "label": "Antivirals", "dose": 2, "unit": "mg/kg/dose", "frequency": "BD", "note": "Influenza.", "maxSingleDose": 75, "maxDailyDose": 150 }]
+  },
+  {
+    "drugName": "Valacyclovir",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Antivirals", "dose": 20, "unit": "mg/kg/dose", "frequency": "BD", "note": "VZV.", "maxSingleDose": 1000, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Ribavirin",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100mg/10ml", "concentration": 10 }],
+    "indications": [{ "label": "Antivirals", "dose": 15, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Severe RSV.", "maxSingleDose": 600, "maxDailyDose": 1800 }]
+  },
+  {
+    "drugName": "Epinephrine (1:10000)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "1mg/10ml", "concentration": 0.1 }],
+    "indications": [{ "label": "Emergency", "dose": 0.01, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Cardiac arrest.", "maxSingleDose": 1, "maxDailyDose": 10 }]
+  },
+  {
+    "drugName": "Atropine",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "0.6mg/1ml", "concentration": 0.6 }],
+    "indications": [{ "label": "Emergency", "dose": 0.02, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Bradycardia.", "maxSingleDose": 0.6, "maxDailyDose": 2 }]
+  },
+  {
+    "drugName": "Adenosine (1st dose)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "6mg/2ml", "concentration": 3 }],
+    "indications": [{ "label": "Emergency", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "STAT", "note": "SVT.", "maxSingleDose": 6, "maxDailyDose": 12 }]
+  },
+  {
+    "drugName": "Amiodarone",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "150mg/3ml", "concentration": 50 }],
+    "indications": [{ "label": "Emergency", "dose": 5, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Arrhythmias.", "maxSingleDose": 300, "maxDailyDose": 600 }]
+  },
+  {
+    "drugName": "Caffeine Citrate (Load)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 24,
+    "formulations": [{ "type": "injection", "strength": "20mg/1ml", "concentration": 20 }],
+    "indications": [{ "label": "Emergency", "dose": 20, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Apnea of prematurity.", "maxSingleDose": 100, "maxDailyDose": 100 }]
+  },
+  {
+    "drugName": "Dopamine (Infusion start)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "40mg/1ml", "concentration": 40 }],
+    "indications": [{ "label": "Emergency", "dose": 5, "unit": "mcg/kg/min", "frequency": "CONT", "note": "Inotrope.", "maxSingleDose": 20, "maxDailyDose": 20 }]
+  },
+  {
+    "drugName": "Dobutamine",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "12.5mg/1ml", "concentration": 12.5 }],
+    "indications": [{ "label": "Emergency", "dose": 5, "unit": "mcg/kg/min", "frequency": "CONT", "note": "Inotrope.", "maxSingleDose": 20, "maxDailyDose": 20 }]
+  },
+  {
+    "drugName": "Isoproterenol",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "1mg/1ml", "concentration": 1 }],
+    "indications": [{ "label": "Emergency", "dose": 0.05, "unit": "mcg/kg/min", "frequency": "CONT", "note": "Beta agonist.", "maxSingleDose": 2, "maxDailyDose": 2 }]
+  },
+  {
+    "drugName": "Sodium Bicarbonate (1 mEq/mL)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "84mg/1ml", "concentration": 84 }],
+    "indications": [{ "label": "Emergency", "dose": 84, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Acidosis.", "maxSingleDose": 4200, "maxDailyDose": 8400 }]
+  },
+  {
+    "drugName": "Calcium Gluconate (10%)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Emergency", "dose": 100, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Hypocalcemia.", "maxSingleDose": 1000, "maxDailyDose": 3000 }]
+  },
+  {
+    "drugName": "Calcium Chloride",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Emergency", "dose": 20, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Hypocalcemia.", "maxSingleDose": 500, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Magnesium Sulfate",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "500mg/1ml", "concentration": 500 }],
+    "indications": [{ "label": "Emergency", "dose": 50, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Asthma/Torsades.", "maxSingleDose": 2000, "maxDailyDose": 4000 }]
+  },
+  {
+    "drugName": "Dextrose 25% (D25W)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "250mg/1ml", "concentration": 250 }],
+    "indications": [{ "label": "Emergency", "dose": 250, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Hypoglycemia.", "maxSingleDose": 12500, "maxDailyDose": 25000 }]
+  },
+  {
+    "drugName": "Furosemide (Lasix)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "200mg/2ml", "concentration": 100 }],
+    "indications": [{ "label": "Emergency", "dose": 1, "unit": "mg/kg/dose", "frequency": "BD", "note": "Diuretic.", "maxSingleDose": 40, "maxDailyDose": 80 }]
+  },
+  {
+    "drugName": "Dexamethasone (Transfusion Rxn)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100mg/2ml", "concentration": 50 }],
+    "indications": [{ "label": "Emergency", "dose": 5, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Cotson/Oradexon.", "maxSingleDose": 100, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Chlorpheniramine (Avil)",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Emergency", "dose": 0.15, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Allergy.", "maxSingleDose": 5, "maxDailyDose": 20 }]
+  },
+  {
+    "drugName": "Albuterol/Salbutamol (Neb)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "respule", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Respiratory", "dose": 0.15, "unit": "mg/kg/dose", "frequency": "PRN", "note": "Acute asthma.", "maxSingleDose": 5, "maxDailyDose": 20 }]
+  },
+  {
+    "drugName": "Budesonide (Neb)",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "respule", "strength": "0.5mg/2ml", "concentration": 0.25 }],
+    "indications": [{ "label": "Respiratory", "dose": 0.5, "unit": "mg/kg/dose", "frequency": "BD", "note": "Inhaled steroid.", "maxSingleDose": 1, "maxDailyDose": 2 }]
+  },
+  {
+    "drugName": "Dexamethasone (Respiratory)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "4mg/1ml", "concentration": 4 }],
+    "indications": [{ "label": "Respiratory", "dose": 0.3, "unit": "mg/kg/dose", "frequency": "BD", "note": "Croup.", "maxSingleDose": 12, "maxDailyDose": 24 }]
+  },
+  {
+    "drugName": "Methylprednisolone",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "40mg/1ml", "concentration": 40 }],
+    "indications": [{ "label": "Respiratory", "dose": 1, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Severe asthma.", "maxSingleDose": 60, "maxDailyDose": 240 }]
+  },
+  {
+    "drugName": "Prednisolone",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "5mg/5ml", "concentration": 1 }],
+    "indications": [{ "label": "Respiratory", "dose": 1, "unit": "mg/kg/dose", "frequency": "OD", "note": "3-5 day course.", "maxSingleDose": 40, "maxDailyDose": 60 }]
+  },
+  {
+    "drugName": "Prednisone",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "5mg/5ml", "concentration": 1 }],
+    "indications": [{ "label": "Respiratory", "dose": 1, "unit": "mg/kg/dose", "frequency": "OD", "note": "Steroid.", "maxSingleDose": 40, "maxDailyDose": 60 }]
+  },
+  {
+    "drugName": "Hydrocortisone",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Respiratory", "dose": 2, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Acute stress.", "maxSingleDose": 100, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Beclomethasone (Inhaler)",
+    "ageMinDays": 1825,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "inhaler", "strength": "0.042mg/1ml", "concentration": 0.042 }],
+    "indications": [{ "label": "Respiratory", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "BD", "note": "Not for <5 yrs.", "maxSingleDose": 0.2, "maxDailyDose": 0.4 }]
+  },
+  {
+    "drugName": "Ipratropium (Neb)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "respule", "strength": "0.25mg/1ml", "concentration": 0.25 }],
+    "indications": [{ "label": "Respiratory", "dose": 0.25, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Anticholinergic.", "maxSingleDose": 0.5, "maxDailyDose": 1.5 }]
+  },
+  {
+    "drugName": "Theophylline",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "80mg/15ml", "concentration": 5.33 }],
+    "indications": [{ "label": "Respiratory", "dose": 5, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Monitor levels.", "maxSingleDose": 200, "maxDailyDose": 600 }]
+  },
+  {
+    "drugName": "Aminophylline",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "25mg/5ml", "concentration": 5 }],
+    "indications": [{ "label": "Respiratory", "dose": 5, "unit": "mg/kg/dose", "frequency": "TDS", "note": "IV infusion.", "maxSingleDose": 250, "maxDailyDose": 750 }]
+  },
+  {
+    "drugName": "Montelukast",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "sachet", "strength": "4mg/1ml", "concentration": 4 }],
+    "indications": [{ "label": "Respiratory", "dose": 0.2, "unit": "mg/kg/dose", "frequency": "OD", "note": "Leukotriene ant.", "maxSingleDose": 10, "maxDailyDose": 10 }]
+  },
+  {
+    "drugName": "Ondansetron",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "4mg/5ml", "concentration": 0.8 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.15, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Vomiting.", "maxSingleDose": 8, "maxDailyDose": 24 }]
+  },
+  {
+    "drugName": "Omeprazole",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.35, "unit": "mg/kg/dose", "frequency": "BD", "note": "PPI.", "maxSingleDose": 20, "maxDailyDose": 40 }]
+  },
+  {
+    "drugName": "Domperidone",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "5mg/5ml", "concentration": 1 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.3, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Prokinetic.", "maxSingleDose": 10, "maxDailyDose": 30 }]
+  },
+  {
+    "drugName": "Metoclopramide",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Prokinetic.", "maxSingleDose": 10, "maxDailyDose": 30 }]
+  },
+  {
+    "drugName": "Ranitidine",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "75mg/15ml", "concentration": 5 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 2, "unit": "mg/kg/dose", "frequency": "TDS", "note": "H2 blocker.", "maxSingleDose": 150, "maxDailyDose": 450 }]
+  },
+  {
+    "drugName": "Cimetidine",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/20ml", "concentration": 10 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 5, "unit": "mg/kg/dose", "frequency": "QDS", "note": "H2 blocker.", "maxSingleDose": 400, "maxDailyDose": 1600 }]
+  },
+  {
+    "drugName": "Famotidine",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "20mg/1ml", "concentration": 20 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.5, "unit": "mg/kg/dose", "frequency": "BD", "note": "H2 blocker.", "maxSingleDose": 40, "maxDailyDose": 80 }]
+  },
+  {
+    "drugName": "Pantoprazole",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "20mg/1ml", "concentration": 20 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.5, "unit": "mg/kg/dose", "frequency": "OD", "note": "PPI.", "maxSingleDose": 40, "maxDailyDose": 40 }]
+  },
+  {
+    "drugName": "Lansoprazole",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "15mg/1ml", "concentration": 15 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.5, "unit": "mg/kg/dose", "frequency": "OD", "note": "PPI.", "maxSingleDose": 30, "maxDailyDose": 30 }]
+  },
+  {
+    "drugName": "Loperamide",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "2mg/1ml", "concentration": 2 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "BD", "note": "Not for acute diar.", "maxSingleDose": 2, "maxDailyDose": 8 }]
+  },
+  {
+    "drugName": "Bismuth Subsalicylate",
+    "ageMinDays": 1095,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "262mg/15ml", "concentration": 17.47 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 0.6, "unit": "mg/kg/dose", "frequency": "QDS", "note": "Antidiarrheal.", "maxSingleDose": 524, "maxDailyDose": 2096 }]
+  },
+  {
+    "drugName": "Lactulose",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "667mg/1ml", "concentration": 667 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 1, "unit": "ml/kg/dose", "frequency": "OD", "note": "Laxative.", "maxSingleDose": 30, "maxDailyDose": 60 }]
+  },
+  {
+    "drugName": "Docusate Sodium",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "50mg/1ml", "concentration": 50 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 3, "unit": "mg/kg/dose", "frequency": "OD", "note": "Stool softener.", "maxSingleDose": 100, "maxDailyDose": 300 }]
+  },
+  {
+    "drugName": "Glycerin (Suppository)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "suppository", "strength": "1000mg/1ml", "concentration": 1000 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 1, "unit": "unit/dose", "frequency": "PRN", "note": "Laxative.", "maxSingleDose": 1, "maxDailyDose": 2 }]
+  },
+  {
+    "drugName": "Psyllium Husk",
+    "ageMinDays": 2190,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "powder", "strength": "500mg/1ml", "concentration": 500 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 5, "unit": "g/dose", "frequency": "OD", "note": "Fiber.", "maxSingleDose": 5, "maxDailyDose": 15 }]
+  },
+  {
+    "drugName": "Tiemonium Methylsulphate (Algin)",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "50mg/5ml", "concentration": 10 }],
+    "indications": [{ "label": "Gastro/Other", "dose": 10, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Antispasmodic.", "maxSingleDose": 50, "maxDailyDose": 150 }]
+  },
+  {
+    "drugName": "Diazepam (Rectal/IV)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Neurology", "dose": 0.5, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Status epilepticus.", "maxSingleDose": 10, "maxDailyDose": 20 }]
+  },
+  {
+    "drugName": "Phenobarbital (Load)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "200mg/1ml", "concentration": 200 }],
+    "indications": [{ "label": "Neurology", "dose": 20, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Neonatal seizures.", "maxSingleDose": 1000, "maxDailyDose": 1000 }]
+  },
+  {
+    "drugName": "Phenobarbital (Maintenance)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "30mg/1ml", "concentration": 30 }],
+    "indications": [{ "label": "Neurology", "dose": 2.5, "unit": "mg/kg/dose", "frequency": "BD", "note": "Maintenance.", "maxSingleDose": 100, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Phenytoin/Phosphenytoin (Load)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "50mg/1ml", "concentration": 50 }],
+    "indications": [{ "label": "Neurology", "dose": 30, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Monitor cardiac.", "maxSingleDose": 1000, "maxDailyDose": 1000 }]
+  },
+  {
+    "drugName": "Phenytoin (Maintenance)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "30mg/1ml", "concentration": 30 }],
+    "indications": [{ "label": "Neurology", "dose": 5, "unit": "mg/kg/dose", "frequency": "BD", "note": "Maintenance.", "maxSingleDose": 150, "maxDailyDose": 300 }]
+  },
+  {
+    "drugName": "Midazolam",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "1mg/1ml", "concentration": 1 }],
+    "indications": [{ "label": "Neurology", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Sedation/Seizure.", "maxSingleDose": 10, "maxDailyDose": 30 }]
+  },
+  {
+    "drugName": "Lorazepam",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "2mg/1ml", "concentration": 2 }],
+    "indications": [{ "label": "Neurology", "dose": 0.05, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Seizures.", "maxSingleDose": 4, "maxDailyDose": 8 }]
+  },
+  {
+    "drugName": "Clonazepam",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "0.5mg/1ml", "concentration": 0.5 }],
+    "indications": [{ "label": "Neurology", "dose": 0.05, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Seizures.", "maxSingleDose": 2, "maxDailyDose": 6 }]
+  },
+  {
+    "drugName": "Valproic Acid (Depakote)",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Neurology", "dose": 15, "unit": "mg/kg/dose", "frequency": "BD", "note": "Broad spectrum.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Levetiracetam (Keppra)",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Neurology", "dose": 10, "unit": "mg/kg/dose", "frequency": "BD", "note": "Focal seizures.", "maxSingleDose": 1500, "maxDailyDose": 3000 }]
+  },
+  {
+    "drugName": "Carbamazepine",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Neurology", "dose": 5, "unit": "mg/kg/dose", "frequency": "BD", "note": "Focal seizures.", "maxSingleDose": 600, "maxDailyDose": 1200 }]
+  },
+  {
+    "drugName": "Oxcarbazepine",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "60mg/1ml", "concentration": 60 }],
+    "indications": [{ "label": "Neurology", "dose": 8, "unit": "mg/kg/dose", "frequency": "BD", "note": "Focal seizures.", "maxSingleDose": 600, "maxDailyDose": 1200 }]
+  },
+  {
+    "drugName": "Lamotrigine",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "25mg/1ml", "concentration": 25 }],
+    "indications": [{ "label": "Neurology", "dose": 1, "unit": "mg/kg/dose", "frequency": "OD", "note": "Titrate slowly.", "maxSingleDose": 100, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Topiramate",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "25mg/1ml", "concentration": 25 }],
+    "indications": [{ "label": "Neurology", "dose": 1, "unit": "mg/kg/dose", "frequency": "BD", "note": "Seizures.", "maxSingleDose": 200, "maxDailyDose": 400 }]
+  },
+  {
+    "drugName": "Gabapentin",
+    "ageMinDays": 1095,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Neurology", "dose": 10, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Neuropathic pain.", "maxSingleDose": 900, "maxDailyDose": 2700 }]
+  },
+  {
+    "drugName": "Pyridoxine (Vitamin B6)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100mg/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Neurology", "dose": 100, "unit": "mg/kg/dose", "frequency": "STAT", "note": "B6 dep. seizures.", "maxSingleDose": 500, "maxDailyDose": 500 }]
+  },
+  {
+    "drugName": "Digoxin (Load)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "0.25mg/1ml", "concentration": 0.25 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.03, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Total loading dose.", "maxSingleDose": 1, "maxDailyDose": 1 }]
+  },
+  {
+    "drugName": "Digoxin (Maintenance)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "0.25mg/1ml", "concentration": 0.25 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.01, "unit": "mg/kg/dose", "frequency": "BD", "note": "Maintenance.", "maxSingleDose": 0.25, "maxDailyDose": 0.5 }]
+  },
+  {
+    "drugName": "Propranolol",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "10mg/5ml", "concentration": 2 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 1, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Beta blocker.", "maxSingleDose": 40, "maxDailyDose": 120 }]
+  },
+  {
+    "drugName": "Atenolol",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "25mg/5ml", "concentration": 5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 1, "unit": "mg/kg/dose", "frequency": "OD", "note": "Beta blocker.", "maxSingleDose": 50, "maxDailyDose": 100 }]
+  },
+  {
+    "drugName": "Metoprolol",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "25mg/5ml", "concentration": 5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 1, "unit": "mg/kg/dose", "frequency": "BD", "note": "Beta blocker.", "maxSingleDose": 50, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Nifedipine (Extended Release)",
+    "ageMinDays": 1095,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.25, "unit": "mg/kg/dose", "frequency": "BD", "note": "Calcium channel bl.", "maxSingleDose": 20, "maxDailyDose": 60 }]
+  },
+  {
+    "drugName": "Amlodipine",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.2, "unit": "mg/kg/dose", "frequency": "OD", "note": "Hypertension.", "maxSingleDose": 5, "maxDailyDose": 10 }]
+  },
+  {
+    "drugName": "Diltiazem",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "30mg/1ml", "concentration": 30 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.5, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Hypertension.", "maxSingleDose": 60, "maxDailyDose": 180 }]
+  },
+  {
+    "drugName": "Enalapril (ACE Inhibitor)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "2.5mg/1ml", "concentration": 2.5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "BD", "note": "Heart failure.", "maxSingleDose": 10, "maxDailyDose": 40 }]
+  },
+  {
+    "drugName": "Lisinopril",
+    "ageMinDays": 2190,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "OD", "note": "Hypertension.", "maxSingleDose": 10, "maxDailyDose": 40 }]
+  },
+  {
+    "drugName": "Captopril",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "12.5mg/1ml", "concentration": 12.5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.3, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Heart failure.", "maxSingleDose": 25, "maxDailyDose": 150 }]
+  },
+  {
+    "drugName": "Spironolactone",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "25mg/5ml", "concentration": 5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 1, "unit": "mg/kg/dose", "frequency": "OD", "note": "K-sparing diuretic.", "maxSingleDose": 50, "maxDailyDose": 100 }]
+  },
+  {
+    "drugName": "Amiloride",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 0.3, "unit": "mg/kg/dose", "frequency": "OD", "note": "Diuretic.", "maxSingleDose": 5, "maxDailyDose": 10 }]
+  },
+  {
+    "drugName": "Hydrochlorothiazide",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "25mg/1ml", "concentration": 25 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 1, "unit": "mg/kg/dose", "frequency": "BD", "note": "Diuretic.", "maxSingleDose": 25, "maxDailyDose": 50 }]
+  },
+  {
+    "drugName": "Aspirin (Low Dose)",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "75mg/5ml", "concentration": 15 }],
+    "indications": [{ "label": "Cardiovascular", "dose": 3, "unit": "mg/kg/dose", "frequency": "OD", "note": "Antiplatelet.", "maxSingleDose": 75, "maxDailyDose": 75 }]
+  },
+  {
+    "drugName": "Insulin (Rapid Acting)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100U/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Endocrine", "dose": 0.1, "unit": "U/kg/dose", "frequency": "PRN", "note": "Prandial insulin.", "maxSingleDose": 10, "maxDailyDose": 50 }]
+  },
+  {
+    "drugName": "Insulin (NPH)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "100U/1ml", "concentration": 100 }],
+    "indications": [{ "label": "Endocrine", "dose": 0.1, "unit": "U/kg/dose", "frequency": "BD", "note": "Basal insulin.", "maxSingleDose": 20, "maxDailyDose": 60 }]
+  },
+  {
+    "drugName": "Metformin",
+    "ageMinDays": 3650,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Endocrine", "dose": 5, "unit": "mg/kg/dose", "frequency": "BD", "note": "Not for <10 yrs.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Glibenclamide (Glyburide)",
+    "ageMinDays": 4380,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Endocrine", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "OD", "note": "Sulphonlyurea.", "maxSingleDose": 5, "maxDailyDose": 15 }]
+  },
+  {
+    "drugName": "Levothyroxine",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "25mcg/1ml", "concentration": 25 }],
+    "indications": [{ "label": "Endocrine", "dose": 2, "unit": "mcg/kg/dose", "frequency": "OD", "note": "Maintenance.", "maxSingleDose": 100, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Calcium Supplementation",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "500mg/5ml", "concentration": 100 }],
+    "indications": [{ "label": "Endocrine", "dose": 25, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Elemental calcium.", "maxSingleDose": 500, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Vitamin D (Cholecalciferol)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "drop", "strength": "400U/1ml", "concentration": 400 }],
+    "indications": [{ "label": "Endocrine", "dose": 0.1, "unit": "ml/dose", "frequency": "OD", "note": "Supplement.", "maxSingleDose": 400, "maxDailyDose": 2000 }]
+  },
+  {
+    "drugName": "Zinc Sulfate",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "25mg/5ml", "concentration": 5 }],
+    "indications": [{ "label": "Supplements", "dose": 0.3, "unit": "mg/kg/dose", "frequency": "OD", "note": "For diarrhea.", "maxSingleDose": 20, "maxDailyDose": 20 }]
+  },
+  {
+    "drugName": "Vitamin A (Retinol)",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "capsule", "strength": "200000U/1ml", "concentration": 200000 }],
+    "indications": [{ "label": "Supplements", "dose": 2, "unit": "unit/dose", "frequency": "STAT", "note": "High dose prophylaxis.", "maxSingleDose": 200000, "maxDailyDose": 200000 }]
+  },
+  {
+    "drugName": "Vitamin C (Ascorbic Acid)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Supplements", "dose": 15, "unit": "mg/kg/dose", "frequency": "OD", "note": "Scurvy.", "maxSingleDose": 250, "maxDailyDose": 500 }]
+  },
+  {
+    "drugName": "Vitamin E (Tocopherol)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "200mg/1ml", "concentration": 200 }],
+    "indications": [{ "label": "Supplements", "dose": 0.7, "unit": "mg/kg/dose", "frequency": "OD", "note": "Antioxidant.", "maxSingleDose": 50, "maxDailyDose": 100 }]
+  },
+  {
+    "drugName": "Vitamin B12 (Cyanocobalamin)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "1mg/1ml", "concentration": 1 }],
+    "indications": [{ "label": "Supplements", "dose": 0.001, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Deficiency.", "maxSingleDose": 1, "maxDailyDose": 1 }]
+  },
+  {
+    "drugName": "Folic Acid",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "5mg/5ml", "concentration": 1 }],
+    "indications": [{ "label": "Supplements", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "OD", "note": "Megaloblastic an.", "maxSingleDose": 5, "maxDailyDose": 5 }]
+  },
+  {
+    "drugName": "Iron Supplement (Compiron/Ferrous)",
+    "ageMinDays": 120,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "100mg/5ml", "concentration": 20 }],
+    "indications": [{ "label": "Supplements", "dose": 3.5, "unit": "mg/kg/dose", "frequency": "OD", "note": "Elemental iron.", "maxSingleDose": 100, "maxDailyDose": 200 }]
+  },
+  {
+    "drugName": "Potassium Chloride (Syp KT)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Supplements", "dose": 225, "unit": "mg/kg/dose", "frequency": "TDS", "note": "3 mmol/kg/dose.", "maxSingleDose": 1500, "maxDailyDose": 4500 }]
+  },
+  {
+    "drugName": "Vitamin K1 (K-One)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Supplements", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "STAT", "note": "HDN prophylaxis.", "maxSingleDose": 1, "maxDailyDose": 10 }]
+  },
+  {
+    "drugName": "Pyrantel Pamoate",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "250mg/5ml", "concentration": 50 }],
+    "indications": [{ "label": "Supplements", "dose": 10, "unit": "mg/kg/dose", "frequency": "STAT", "note": "Deworming.", "maxSingleDose": 1000, "maxDailyDose": 1000 }]
+  },
+  {
+    "drugName": "Paracetamol + Ibuprofen (Combination)",
+    "ageMinDays": 180,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "150mg/5ml", "concentration": 30 }],
+    "indications": [{ "label": "Musculoskeletal", "dose": 7.5, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Synergistic effect.", "maxSingleDose": 500, "maxDailyDose": 1500 }]
+  },
+  {
+    "drugName": "Skeletal Muscle Relaxant - Baclofen",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "10mg/5ml", "concentration": 2 }],
+    "indications": [{ "label": "Musculoskeletal", "dose": 0.3, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Spasticity.", "maxSingleDose": 20, "maxDailyDose": 60 }]
+  },
+  {
+    "drugName": "Cyclobenzaprine",
+    "ageMinDays": 4380,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "5mg/1ml", "concentration": 5 }],
+    "indications": [{ "label": "Musculoskeletal", "dose": 0.1, "unit": "mg/kg/dose", "frequency": "TDS", "note": "Muscle spasm.", "maxSingleDose": 10, "maxDailyDose": 30 }]
+  },
+  {
+    "drugName": "Hydrocortisone Cream (1%)",
+    "ageMinDays": 0,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "cream", "strength": "10mg/1ml", "concentration": 10 }],
+    "indications": [{ "label": "Dermatological", "dose": 0.5, "unit": "unit/dose", "frequency": "BD", "note": "Thin layer.", "maxSingleDose": 1, "maxDailyDose": 2 }]
+  },
+  {
+    "drugName": "Betamethasone (Topical)",
+    "ageMinDays": 365,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "cream", "strength": "0.05mg/1ml", "concentration": 0.05 }],
+    "indications": [{ "label": "Dermatological", "dose": 0.1, "unit": "unit/dose", "frequency": "BD", "note": "Thin layer.", "maxSingleDose": 1, "maxDailyDose": 2 }]
+  },
+  {
+    "drugName": "Permethrin (Scabies)",
+    "ageMinDays": 60,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "cream", "strength": "50mg/1ml", "concentration": 50 }],
+    "indications": [{ "label": "Dermatological", "dose": 1, "unit": "unit/dose", "frequency": "STAT", "note": "Wash after 8-12h.", "maxSingleDose": 1, "maxDailyDose": 1 }]
+  },
+  {
+    "drugName": "Aciclovir (Topical)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "cream", "strength": "50mg/1ml", "concentration": 50 }],
+    "indications": [{ "label": "Dermatological", "dose": 1, "unit": "unit/dose", "frequency": "QDS", "note": "Herpes simplex.", "maxSingleDose": 1, "maxDailyDose": 5 }]
+  },
+  {
+    "drugName": "Methotrexate",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "syrup", "strength": "2.5mg/1ml", "concentration": 2.5 }],
+    "indications": [{ "label": "Hemato-Oncology", "dose": 0.01, "unit": "mg/kg/dose", "frequency": "WEEK", "note": "Cytotoxic.", "maxSingleDose": 25, "maxDailyDose": 25 }]
+  },
+  {
+    "drugName": "6-Mercaptopurine",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "50mg/1ml", "concentration": 50 }],
+    "indications": [{ "label": "Hemato-Oncology", "dose": 1.5, "unit": "mg/kg/dose", "frequency": "OD", "note": "ALL maintenance.", "maxSingleDose": 75, "maxDailyDose": 75 }]
+  },
+  {
+    "drugName": "Cyclophosphamide",
+    "ageMinDays": 730,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "tablet", "strength": "25mg/1ml", "concentration": 25 }],
+    "indications": [{ "label": "Hemato-Oncology", "dose": 1, "unit": "mg/kg/dose", "frequency": "OD", "note": "Cytotoxic.", "maxSingleDose": 100, "maxDailyDose": 100 }]
+  },
+  {
+    "drugName": "Vincristine",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "1mg/1ml", "concentration": 1 }],
+    "indications": [{ "label": "Hemato-Oncology", "dose": 0.05, "unit": "mg/kg/dose", "frequency": "WEEK", "note": "Neurotoxicity risk.", "maxSingleDose": 2, "maxDailyDose": 2 }]
+  },
+  {
+    "drugName": "Daunorubicin",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "10mg/10ml", "concentration": 1 }],
+    "indications": [{ "label": "Hemato-Oncology", "dose": 1, "unit": "mg/kg/dose", "frequency": "WEEK", "note": "Cardiotoxicity risk.", "maxSingleDose": 50, "maxDailyDose": 50 }]
+  },
+  {
+    "drugName": "Filgrastim (G-CSF)",
+    "ageMinDays": 30,
+    "ageMaxMonths": 144,
+    "formulations": [{ "type": "injection", "strength": "300mcg/1ml", "concentration": 300 }],
+    "indications": [{ "label": "Hemato-Oncology", "dose": 5, "unit": "mcg/kg/dose", "frequency": "OD", "note": "Neutropenia.", "maxSingleDose": 300, "maxDailyDose": 300 }]
+  }
+]
