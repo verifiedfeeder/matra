@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PediDose | DB Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1E1E1E;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --accent-color: #CCFF00;
+            --warning-color: #FF7F50;
+            --border-color: #333333;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            border: 2px solid var(--border-color);
+            background-color: var(--surface-color);
+            padding: 2rem;
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        h1 { font-family: var(--font-mono); font-size: 1.5rem; color: var(--accent-color); }
+
+        /* ── Uniform button system ── */
+        .btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            transition: border-color 0.15s, color 0.15s, background 0.15s;
+            white-space: nowrap;
+        }
+        .btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
+
+        /* Primary: filled accent — Save button only */
+        .btn.primary {
+            border-color: var(--accent-color);
+            background: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: bold;
+        }
+        .btn.primary:hover { opacity: 0.88; }
+
+        /* Accent-outlined: secondary important actions */
+        .btn.accent {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .btn.accent:hover { background: var(--accent-color); color: var(--bg-color); }
+
+        /* Danger */
+        .btn.danger { border-color: var(--warning-color); color: var(--warning-color); }
+        .btn.danger:hover { background: var(--warning-color); color: var(--bg-color); }
+
+        /* Small inline buttons (DEL, DUP, X) */
+        .btn.sm { padding: 0.2rem 0.5rem; font-size: 0.7rem; }
+
+        /* Full-width add buttons */
+        .btn.add { width: 100%; margin-bottom: 1rem; border-style: dashed; }
+        .btn.add:hover { border-style: solid; }
+
+        /* Header button group */
+        .header-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+        /* Unsaved indicator */
+        #unsaved-dot {
+            display: none;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--warning-color);
+            margin-left: 0.4rem;
+            vertical-align: middle;
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        #unsaved-dot.visible { opacity: 1; }
+
+        /* ── Toast ── */
+        #admin-toast {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            background: var(--accent-color);
+            color: var(--bg-color);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 0.55rem 1.25rem;
+            z-index: 9999;
+            transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        #admin-toast.show { transform: translateX(-50%) translateY(0); }
+        #admin-toast.warn { background: var(--warning-color); }
+
+        /* ── Save button pulse ── */
+        @keyframes savePulse {
+            0%   { box-shadow: 0 0 0 0 rgba(204,255,0,0.6); }
+            70%  { box-shadow: 0 0 0 8px rgba(204,255,0,0); }
+            100% { box-shadow: 0 0 0 0 rgba(204,255,0,0); }
+        }
+        .btn.primary.pulse { animation: savePulse 0.5s ease-out; }
+
+        /* ── Entry slide-in ── */
+        @keyframes entryIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .formulation-entry, .indication-entry {
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            animation: entryIn 0.18s ease-out;
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+        section { margin-bottom: 2rem; }
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.25rem;
+            display: block;
+        }
+
+        .form-group { margin-bottom: 1rem; }
+        label { font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 0.5rem; }
+        input, select, textarea {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem;
+            font-family: var(--font-mono);
+            width: 100%;
+            transition: border-color 0.15s;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent-color); outline: none; }
+
+        .drug-list {
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .drug-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .drug-item:hover { background: rgba(204, 255, 0, 0.05); }
+        .drug-item.active { border-left: 4px solid var(--accent-color); background: rgba(204, 255, 0, 0.08); }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .datalist-input { position: relative; }
+
+        .export-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .export-content {
+            background: var(--surface-color);
+            border: 2px solid var(--accent-color);
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+        }
+        #json-output {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            color: #0f0;
+            font-family: var(--font-mono);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hint { font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.25rem; }
+
+        /* Validator */
+        .validator-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: flex-start; z-index: 1000; padding: 2rem 1rem; overflow-y: auto; }
+        .validator-content { background: var(--surface-color); border: 2px solid var(--accent-color); padding: 2rem; width: 100%; max-width: 860px; margin: auto; }
+        .validator-content h2 { font-family: var(--font-mono); color: var(--accent-color); margin-bottom: 0.5rem; }
+        .val-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .val-stat { border: 1px solid var(--border-color); padding: 1rem; text-align: center; }
+        .val-stat .num { font-family: var(--font-mono); font-size: 1.8rem; font-weight: bold; }
+        .val-stat .lbl { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; margin-top: 0.25rem; }
+        .val-stat.ok .num { color: var(--accent-color); }
+        .val-stat.err .num { color: #ff4444; }
+        .val-stat.warn .num { color: var(--warning-color); }
+        .val-stat.info .num { color: #66aaff; }
+        .val-filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .val-filter-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 0.3rem 0.75rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer; text-transform: uppercase; }
+        .val-filter-btn.active { border-color: var(--accent-color); color: var(--accent-color); }
+        .val-filter-btn.f-error.active { border-color: #ff4444; color: #ff4444; }
+        .val-filter-btn.f-warn.active { border-color: var(--warning-color); color: var(--warning-color); }
+        .val-drug-block { border: 1px solid var(--border-color); margin-bottom: 0.75rem; }
+        .val-drug-header { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.75rem; background: rgba(255,255,255,0.03); cursor: pointer; border-bottom: 1px solid var(--border-color); }
+        .val-drug-name { font-family: var(--font-mono); font-size: 0.85rem; }
+        .val-drug-badges { display: flex; gap: 0.4rem; }
+        .val-badge { font-size: 0.65rem; padding: 0.15rem 0.4rem; border: 1px solid; font-family: var(--font-mono); }
+        .val-badge.error { color: #ff4444; border-color: #ff4444; }
+        .val-badge.warn { color: var(--warning-color); border-color: var(--warning-color); }
+        .val-badge.ok { color: var(--accent-color); border-color: var(--accent-color); }
+        .val-issues { padding: 0.75rem; display: none; }
+        .val-issues.open { display: block; }
+        .val-issue { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; }
+        .val-issue:last-child { border-bottom: none; }
+        .val-issue .tag { font-family: var(--font-mono); font-size: 0.65rem; padding: 0.1rem 0.35rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .val-issue .tag.E { background: #ff4444; color: #000; }
+        .val-issue .tag.W { background: var(--warning-color); color: #000; }
+        .val-issue .tag.I { background: #66aaff; color: #000; }
+        .val-issue .msg { color: var(--text-primary); line-height: 1.4; }
+        .val-issue .path { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.7rem; margin-top: 0.1rem; }
+        .val-no-issues { color: var(--accent-color); font-family: var(--font-mono); font-size: 0.8rem; padding: 0.5rem 0; }
+        .val-empty { text-align: center; color: var(--text-secondary); font-family: var(--font-mono); padding: 3rem 0; }
+        .val-fix-btn { font-size: 0.65rem; padding: 0.1rem 0.35rem; background: transparent; border: 1px solid var(--text-secondary); color: var(--text-secondary); font-family: var(--font-mono); cursor: pointer; flex-shrink: 0; margin-top: 0.1rem; }
+        .val-fix-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        #val-search { background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.5rem 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; width: 100%; margin-bottom: 1rem; }
+        #val-search:focus { outline: none; border-color: var(--accent-color); }
+        .val-report-list { max-height: 55vh; overflow-y: auto; }
+        .val-report-list::-webkit-scrollbar { width: 5px; }
+        .val-report-list::-webkit-scrollbar-thumb { background: var(--border-color); }
+    </style>
+</head>
+<div id="admin-toast"></div>
+<body>
+    <div class="container">
+        <header>
+            <h1>DRUG.DB_ADMIN <span id="unsaved-dot" title="Unsaved changes"></span></h1>
+            <div class="header-actions">
+                <button class="btn" onclick="openImportModal()">Import JSON</button>
+                <button class="btn" onclick="openValidator()">Validate DB</button>
+                <button class="btn" onclick="exportData()">Export</button>
+                <button class="btn accent" onclick="createNewDrug()">+ New Drug</button>
+            </div>
+        </header>
+
+        <div class="grid">
+            <section>
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <span class="section-title">01. Database Inventory</span>
+                    <span id="drug-count" class="hint" style="color: var(--accent-color); font-family: var(--font-mono);">0 DRUGS</span>
+                </div>
+                <input type="text" id="search-db" placeholder="Search current database..." style="margin-bottom: 1rem;">
+                <div class="drug-list" id="inventory">
+                    <!-- Loaded via JS -->
+                </div>
+            </section>
+
+            <section id="editor-section">
+                <span class="section-title">02. Drug Editor</span>
+                <form id="drug-form">
+                    <div class="form-group">
+                        <label>Drug Name</label>
+                        <input type="text" id="edit-name" required>
+                    </div>
+                    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Min Age (Days)</label>
+                            <input type="number" id="edit-min-days" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Max Age (Months)</label>
+                            <input type="number" id="edit-max-months" value="216">
+                        </div>
+                    </div>
+
+                    <div id="formulations-container">
+                        <span class="section-title" style="font-size: 0.7rem;">Formulations</span>
+                        <!-- Dynamic -->
+                    </div>
+                    <button type="button" class="btn add" onclick="addFormulation()">+ Add Formulation</button>
+
+                    <div id="indications-container">
+                        <span class="section-title" style="font-size: 0.7rem;">Indications</span>
+                        <!-- Dynamic -->
+                    </div>
+                    <button type="button" class="btn add" onclick="addIndication()">+ Add Indication</button>
+
+                    <div id="brands-container">
+                        <span class="section-title" style="font-size: 0.7rem;">Brands (BD Market)</span>
+                        <!-- Dynamic -->
+                    </div>
+                    <button type="button" class="btn add" onclick="addBrand()">+ Add Brand</button>
+
+                    <button type="submit" id="btn-save" class="btn primary" style="width:100%; margin-top:0.5rem;">Save Changes to Local State</button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="export-modal" id="export-modal">
+        <div class="export-content">
+            <h2 style="font-family: var(--font-mono); margin-bottom: 1rem;">JSON EXPORT</h2>
+            <p class="hint" style="margin-bottom: 1rem;">Copy this content and overwrite your <strong>drugs.json</strong> file, then commit and push to GitHub Pages.</p>
+            <textarea id="json-output" readonly></textarea>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn accent" onclick="copyJson()">Copy to Clipboard</button>
+                <button class="btn danger" onclick="closeExport()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div class="export-modal" id="import-modal">
+        <div class="export-content">
+            <h2 style="font-family: var(--font-mono); margin-bottom: 1rem;">IMPORT DATA</h2>
+            <p class="hint">Paste JSON object(s). Use the following schema for AI generation:</p>
+            <div class="hint" style="background: #000; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid var(--border-color); color: #0f0; font-size: 0.65rem;">
+                { "drugName": "Name", "ageMinDays": 0, "ageMaxMonths": 144, <br>
+                "formulations": [{ "type": "syrup", "strength": "100mg/5ml", "concentration": 20 }], <br>
+                "indications": [{ "label": "Label", "dose": 10, "unit": "mg/kg/dose", "frequency": "BD", "note": "...", "maxSingleDose": 500, "maxDailyDose": 1500 }] }
+            </div>
+            <textarea id="import-input" style="width: 100%; height: 250px; background: #000; color: #fff; font-family: var(--font-mono); padding: 1rem; margin-bottom: 1rem;" placeholder="Paste JSON here..."></textarea>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn accent" onclick="processImport()">Load into Editor</button>
+                <button class="btn danger" onclick="closeImport()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Validator Modal -->
+    <div class="validator-modal" id="validator-modal">
+        <div class="validator-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.25rem;">
+                <h2>DB_VALIDATOR</h2>
+                <button class="btn danger" onclick="closeValidator()">Close</button>
+            </div>
+            <p class="hint" id="val-subtitle">Run a full audit of the loaded drug database.</p>
+
+            <div class="val-summary" id="val-summary" style="display:none;">
+                <div class="val-stat info"><div class="num" id="vs-total">0</div><div class="lbl">Drugs</div></div>
+                <div class="val-stat ok"><div class="num" id="vs-ok">0</div><div class="lbl">Clean</div></div>
+                <div class="val-stat warn"><div class="num" id="vs-warn">0</div><div class="lbl">Warnings</div></div>
+                <div class="val-stat err"><div class="num" id="vs-err">0</div><div class="lbl">Errors</div></div>
+            </div>
+
+            <div id="val-controls" style="display:none;">
+                <input id="val-search" type="text" placeholder="Filter results by drug name..." oninput="renderValidatorReport()">
+                <div class="val-filters">
+                    <span style="font-size:0.7rem; color:var(--text-secondary); align-self:center; margin-right:0.25rem;">SHOW:</span>
+                    <button class="val-filter-btn active" data-filter="all" onclick="setValFilter('all', this)">All</button>
+                    <button class="val-filter-btn f-error" data-filter="error" onclick="setValFilter('error', this)">Errors Only</button>
+                    <button class="val-filter-btn f-warn" data-filter="warn" onclick="setValFilter('warn', this)">Warnings Only</button>
+                    <button class="val-filter-btn" data-filter="ok" onclick="setValFilter('ok', this)">Clean Only</button>
+                </div>
+            </div>
+
+            <div class="val-report-list" id="val-report-list">
+                <div class="val-empty">Press "Run Audit" to analyse the loaded database.</div>
+            </div>
+
+            <div style="display:flex; gap:1rem; margin-top:1.25rem; flex-wrap:wrap;">
+                <button class="btn primary" onclick="runValidator()">Run Audit</button>
+                <button class="btn" id="val-export-btn" style="display:none;" onclick="exportValidatorReport()">Export Report</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datalists for Smart Suggestions -->
+    <datalist id="list-types"></datalist>
+    <datalist id="list-labels"></datalist>
+    <datalist id="list-frequencies"></datalist>
+    <datalist id="list-units"></datalist>
+
+    <script>
+        let drugData = [];
+        let editingIndex = -1;
+
+        // Smart Suggestion Sets
+        let uniqueTypes = new Set();
+        let uniqueLabels = new Set();
+        let uniqueFreqs = new Set();
+        let uniqueUnits = new Set();
+
+        // ─── VALIDATOR ───────────────────────────────────────────────
+        const ALLOWED_TYPES = ['syrup','tablet','capsule','injection','suppository','drops','cream','ointment','gel','powder','suspension','inhaler','patch','solution'];
+        const ALLOWED_UNITS = ['mg/kg/dose','mcg/kg/dose','mg/kg/day','mcg/kg/day','mg/dose','mcg/dose','ml/kg/dose','units/kg/dose','iu/kg/dose'];
+        const COMMON_FREQS  = ['OD','BD','TDS','QDS','QID','PRN','STAT','OM','ON','Q4H','Q6H','Q8H','Q12H','Weekly','Fortnightly'];
+
+        let valResults   = [];   // [{drug, idx, issues:[{level,path,msg}]}]
+        let valFilter    = 'all';
+
+        function openValidator()  { document.getElementById('validator-modal').style.display = 'flex'; }
+        function closeValidator() { document.getElementById('validator-modal').style.display = 'none'; }
+
+        function runValidator() {
+            if (!drugData.length) {
+                document.getElementById('val-report-list').innerHTML = '<div class="val-empty">No drugs loaded in database.</div>';
+                return;
+            }
+
+            valResults = [];
+            let totalErr = 0, totalWarn = 0, totalOk = 0;
+
+            drugData.forEach((drug, idx) => {
+                const issues = [];
+
+                const E = (path, msg) => issues.push({ level:'E', path, msg });
+                const W = (path, msg) => issues.push({ level:'W', path, msg });
+                const I = (path, msg) => issues.push({ level:'I', path, msg });
+
+                const loc = `drug[${idx}]`;
+
+                // ── Top-level ──
+                if (!drug.drugName || !drug.drugName.trim())
+                    E(`${loc}.drugName`, 'Drug name is empty or missing.');
+
+                if (typeof drug.ageMinDays !== 'number' || !Number.isInteger(drug.ageMinDays) || drug.ageMinDays < 0)
+                    E(`${loc}.ageMinDays`, `Must be a non-negative integer (got: ${JSON.stringify(drug.ageMinDays)}).`);
+
+                if (typeof drug.ageMaxMonths !== 'number' || !Number.isInteger(drug.ageMaxMonths) || drug.ageMaxMonths <= 0)
+                    E(`${loc}.ageMaxMonths`, `Must be a positive integer (got: ${JSON.stringify(drug.ageMaxMonths)}).`);
+
+                if (Number.isInteger(drug.ageMinDays) && Number.isInteger(drug.ageMaxMonths)) {
+                    const minAsMonths = drug.ageMinDays / 30.44;
+                    if (minAsMonths > drug.ageMaxMonths)
+                        E(`${loc}.ageRange`, `ageMinDays (${drug.ageMinDays}d ≈ ${minAsMonths.toFixed(1)}mo) exceeds ageMaxMonths (${drug.ageMaxMonths}mo).`);
+                }
+
+                if (!Array.isArray(drug.formulations) || drug.formulations.length === 0)
+                    E(`${loc}.formulations`, 'Must have at least one formulation.');
+
+                if (!Array.isArray(drug.indications) || drug.indications.length === 0)
+                    E(`${loc}.indications`, 'Must have at least one indication.');
+
+                // ── Formulations ──
+                (drug.formulations || []).forEach((f, fi) => {
+                    const fp = `${loc}.formulations[${fi}]`;
+
+                    if (!f.type || !f.type.trim())
+                        E(`${fp}.type`, 'Type is empty.');
+                    else if (!ALLOWED_TYPES.includes(f.type.toLowerCase().trim()))
+                        W(`${fp}.type`, `"${f.type}" is not a standard type. Expected one of: ${ALLOWED_TYPES.join(', ')}.`);
+
+                    if (!f.strength || !f.strength.trim())
+                        W(`${fp}.strength`, 'Strength label is empty (e.g. "250mg/5ml").');
+
+                    if (typeof f.concentration !== 'number' || isNaN(f.concentration))
+                        E(`${fp}.concentration`, `Must be a number (got: ${JSON.stringify(f.concentration)}). This causes division-by-zero.`);
+                    else if (f.concentration <= 0)
+                        E(`${fp}.concentration`, `Must be > 0 (got: ${f.concentration}). This causes division-by-zero in dose calculation.`);
+                    else if (f.concentration > 2000)
+                        W(`${fp}.concentration`, `Value ${f.concentration} is unusually high — confirm units (should be mg/ml or mg/tablet).`);
+                });
+
+                // ── Indications ──
+                (drug.indications || []).forEach((ind, ii) => {
+                    const ip = `${loc}.indications[${ii}]`;
+
+                    if (!ind.label || !ind.label.trim())
+                        E(`${ip}.label`, 'Indication label is empty.');
+
+                    if (typeof ind.dose !== 'number' || isNaN(ind.dose))
+                        E(`${ip}.dose`, `Must be a number (got: ${JSON.stringify(ind.dose)}).`);
+                    else if (ind.dose <= 0)
+                        E(`${ip}.dose`, `Dose must be > 0 (got: ${ind.dose}). Zero dose produces no result.`);
+                    else if (ind.dose > 100)
+                        W(`${ip}.dose`, `Dose of ${ind.dose} is unusually high — confirm unit is mg/kg/dose not mg/dose.`);
+
+                    if (!ind.unit || !ind.unit.trim())
+                        E(`${ip}.unit`, 'Unit is missing.');
+                    else if (!ALLOWED_UNITS.includes(ind.unit.trim()))
+                        W(`${ip}.unit`, `"${ind.unit}" is not a recognised unit. Expected: ${ALLOWED_UNITS.join(', ')}.`);
+
+                    if (!ind.frequency || !ind.frequency.trim())
+                        E(`${ip}.frequency`, 'Frequency is empty.');
+                    else if (!COMMON_FREQS.includes(ind.frequency.trim().toUpperCase()))
+                        I(`${ip}.frequency`, `"${ind.frequency}" is not a standard frequency abbreviation. Verify spelling.`);
+
+                    const maxS = ind.maxSingleDose;
+                    const maxD = ind.maxDailyDose;
+
+                    if (maxS !== null && maxS !== undefined) {
+                        if (typeof maxS !== 'number' || isNaN(maxS))
+                            E(`${ip}.maxSingleDose`, `Must be a number or null (got: ${JSON.stringify(maxS)}).`);
+                        else if (maxS <= 0)
+                            E(`${ip}.maxSingleDose`, `Must be > 0 if provided (got: ${maxS}).`);
+                    }
+
+                    if (maxD !== null && maxD !== undefined) {
+                        if (typeof maxD !== 'number' || isNaN(maxD))
+                            E(`${ip}.maxDailyDose`, `Must be a number or null (got: ${JSON.stringify(maxD)}).`);
+                        else if (maxD <= 0)
+                            E(`${ip}.maxDailyDose`, `Must be > 0 if provided (got: ${maxD}).`);
+                    }
+
+                    if (typeof maxS === 'number' && !isNaN(maxS) && typeof maxD === 'number' && !isNaN(maxD)) {
+                        if (maxD < maxS)
+                            E(`${ip}`, `maxDailyDose (${maxD}) < maxSingleDose (${maxS}). Logically impossible.`);
+                    }
+
+                    if (typeof ind.dose === 'number' && ind.dose > 0 && typeof maxS === 'number' && maxS > 0) {
+                        const estDoseAt10kg = ind.dose * 10;
+                        if (estDoseAt10kg > maxS * 3)
+                            I(`${ip}`, `At 10 kg, calculated dose (~${estDoseAt10kg} mg) is >3× maxSingleDose (${maxS} mg). Capping will apply very aggressively.`);
+                    }
+                });
+
+                // ── Cross-field ──
+                const hasOnlyInjection = (drug.formulations || []).length > 0 &&
+                    (drug.formulations || []).every(f => f.type && f.type.toLowerCase() === 'injection');
+                if (hasOnlyInjection && drug.ageMinDays === 0)
+                    W(`${loc}`, 'Only injection formulations, but ageMinDays is 0 (neonatal). Verify if neonatal IV dosing data is correct.');
+
+                const errCount  = issues.filter(i => i.level === 'E').length;
+                const warnCount = issues.filter(i => i.level === 'W').length;
+
+                if (errCount)  totalErr++;
+                else if (warnCount) totalWarn++;
+                else totalOk++;
+
+                valResults.push({ drug: drug.drugName || `(unnamed #${idx})`, idx, issues });
+            });
+
+            // Update summary
+            document.getElementById('vs-total').textContent = drugData.length;
+            document.getElementById('vs-ok').textContent   = totalOk;
+            document.getElementById('vs-warn').textContent = totalWarn;
+            document.getElementById('vs-err').textContent  = totalErr;
+            document.getElementById('val-summary').style.display  = 'grid';
+            document.getElementById('val-controls').style.display = 'block';
+            document.getElementById('val-export-btn').style.display = 'inline-block';
+            document.getElementById('val-subtitle').textContent =
+                `Audit complete — ${new Date().toLocaleTimeString()}`;
+
+            renderValidatorReport();
+        }
+
+        function setValFilter(f, btn) {
+            valFilter = f;
+            document.querySelectorAll('.val-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderValidatorReport();
+        }
+
+        function renderValidatorReport() {
+            const search = (document.getElementById('val-search')?.value || '').toLowerCase();
+            const list   = document.getElementById('val-report-list');
+            list.innerHTML = '';
+
+            let shown = 0;
+            valResults.forEach(({ drug, idx, issues }) => {
+                if (search && !drug.toLowerCase().includes(search)) return;
+
+                const errCount  = issues.filter(i => i.level === 'E').length;
+                const warnCount = issues.filter(i => i.level === 'W').length;
+                const infoCount = issues.filter(i => i.level === 'I').length;
+                const isClean   = errCount === 0 && warnCount === 0;
+
+                if (valFilter === 'error' && errCount === 0) return;
+                if (valFilter === 'warn'  && warnCount === 0) return;
+                if (valFilter === 'ok'    && !isClean) return;
+
+                shown++;
+                const block = document.createElement('div');
+                block.className = 'val-drug-block';
+
+                const badges = [];
+                if (errCount)  badges.push(`<span class="val-badge error">${errCount} ERR</span>`);
+                if (warnCount) badges.push(`<span class="val-badge warn">${warnCount} WARN</span>`);
+                if (infoCount) badges.push(`<span class="val-badge" style="color:#66aaff;border-color:#66aaff;">${infoCount} INFO</span>`);
+                if (isClean)   badges.push(`<span class="val-badge ok">✓ CLEAN</span>`);
+
+                const issuesId = `vi-${idx}`;
+                block.innerHTML = `
+                    <div class="val-drug-header" onclick="toggleValBlock('${issuesId}')">
+                        <span class="val-drug-name">${drug}</span>
+                        <div class="val-drug-badges">${badges.join('')}</div>
+                    </div>
+                    <div class="val-issues ${!isClean ? 'open' : ''}" id="${issuesId}">
+                        ${isClean
+                            ? '<div class="val-no-issues">✓ No issues found.</div>'
+                            : issues.map(issue => `
+                                <div class="val-issue">
+                                    <span class="tag ${issue.level}">${issue.level === 'E' ? 'ERR' : issue.level === 'W' ? 'WARN' : 'INFO'}</span>
+                                    <div>
+                                        <div class="msg">${issue.msg}</div>
+                                        <div class="path">${issue.path}</div>
+                                    </div>
+                                    ${issue.level !== 'I' ? `<button class="val-fix-btn" onclick="jumpToEditor(${idx})">FIX →</button>` : ''}
+                                </div>`).join('')
+                        }
+                    </div>`;
+                list.appendChild(block);
+            });
+
+            if (shown === 0) {
+                list.innerHTML = `<div class="val-empty">No drugs match current filter/search.</div>`;
+            }
+        }
+
+        function toggleValBlock(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('open');
+        }
+
+        function jumpToEditor(idx) {
+            closeValidator();
+            loadDrug(idx);
+            // Scroll editor into view
+            document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function exportValidatorReport() {
+            const lines = [`MATRA DB VALIDATOR REPORT — ${new Date().toLocaleString()}`, ''];
+            valResults.forEach(({ drug, issues }) => {
+                const errC = issues.filter(i => i.level === 'E').length;
+                const wrnC = issues.filter(i => i.level === 'W').length;
+                const status = errC ? `[${errC} ERRORS]` : wrnC ? `[${wrnC} WARNINGS]` : '[CLEAN]';
+                lines.push(`${status} ${drug}`);
+                issues.forEach(i => {
+                    lines.push(`  ${i.level === 'E' ? 'ERR' : i.level === 'W' ? 'WARN' : 'INFO'}: ${i.msg}`);
+                    lines.push(`       at: ${i.path}`);
+                });
+                if (!issues.length) lines.push('  No issues.');
+                lines.push('');
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `matra-validation-${Date.now()}.txt`;
+            a.click();
+        }
+        // ─── END VALIDATOR ───────────────────────────────────────────
+
+        // ── Toast ────────────────────────────────────────────────────
+        let adminToastTimer;
+        function showToast(msg, type = 'ok') {
+            const t = document.getElementById('admin-toast');
+            t.textContent = msg;
+            t.className = 'show' + (type === 'warn' ? ' warn' : '');
+            clearTimeout(adminToastTimer);
+            adminToastTimer = setTimeout(() => { t.className = ''; }, 2400);
+        }
+
+        // ── Unsaved changes indicator ─────────────────────────────────
+        let hasUnsaved = false;
+        function markUnsaved() {
+            hasUnsaved = true;
+            document.getElementById('unsaved-dot').classList.add('visible');
+        }
+        function clearUnsaved() {
+            hasUnsaved = false;
+            document.getElementById('unsaved-dot').classList.remove('visible');
+        }
+
+        // Mark unsaved on any form input change
+        document.getElementById('drug-form').addEventListener('input', markUnsaved);
+
+        // Warn before navigating away with unsaved changes
+        window.addEventListener('beforeunload', (e) => {
+            if (hasUnsaved) { e.preventDefault(); e.returnValue = ''; }
+        });
+
+        // ── Ctrl+S to save ────────────────────────────────────────────
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                document.getElementById('drug-form').requestSubmit();
+            }
+        });
+
+        async function init() {
+            try {
+                const res = await fetch('drugs.json');
+                drugData = await res.json();
+                updateSuggestions();
+                renderInventory();
+                createNewDrug();
+            } catch (e) {
+                console.error("DB Load failed", e);
+                showToast('Failed to load drugs.json', 'warn');
+            }
+        }
+
+        function updateSuggestions() {
+            drugData.forEach(d => {
+                d.formulations.forEach(f => uniqueTypes.add(f.type));
+                d.indications.forEach(i => {
+                    uniqueLabels.add(i.label);
+                    uniqueFreqs.add(i.frequency);
+                    uniqueUnits.add(i.unit);
+                });
+            });
+
+            updateDatalist('list-types', uniqueTypes);
+            updateDatalist('list-labels', uniqueLabels);
+            updateDatalist('list-frequencies', uniqueFreqs);
+            updateDatalist('list-units', uniqueUnits);
+        }
+
+        function updateDatalist(id, set) {
+            const el = document.getElementById(id);
+            el.innerHTML = '';
+            [...set].sort().forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                el.appendChild(opt);
+            });
+        }
+
+        function renderInventory(filter = "") {
+            const list = document.getElementById('inventory');
+            const countEl = document.getElementById('drug-count');
+            list.innerHTML = '';
+            
+            // Store current filter for potential re-renders
+            const currentFilter = filter || document.getElementById('search-db').value;
+
+            let displayCount = 0;
+            drugData.forEach((drug, idx) => {
+                if (currentFilter && !drug.drugName.toLowerCase().includes(currentFilter.toLowerCase())) return;
+                displayCount++;
+                
+                const div = document.createElement('div');
+                div.className = `drug-item ${editingIndex === idx ? 'active' : ''}`;
+                div.innerHTML = `
+                    <div style="flex: 1;">
+                        <div style="font-family: var(--font-mono); font-weight: bold;">${drug.drugName}</div>
+                        <div class="hint">${drug.formulations.length} formulations | ${drug.indications.length} indications | ${(drug.brands||[]).length} brands</div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn sm" onclick="duplicateDrug(event, ${idx})">DUP</button>
+                        <button class="btn sm danger" onclick="deleteDrug(event, ${idx})">DEL</button>
+                    </div>
+                `;
+                div.onclick = () => loadDrug(idx);
+                list.appendChild(div);
+            });
+
+            countEl.textContent = `${displayCount} DRUG${displayCount !== 1 ? 'S' : ''}`;
+        }
+
+        function duplicateDrug(e, idx) {
+            console.log("Duplicating drug at index:", idx);
+            if (e) e.stopPropagation();
+            
+            if (!drugData[idx]) {
+                console.error("Drug not found at index:", idx);
+                return;
+            }
+
+            const drug = JSON.parse(JSON.stringify(drugData[idx]));
+            drug.drugName = drug.drugName + " (COPY)";
+            drugData.push(drug);
+            
+            const newIndex = drugData.length - 1;
+            console.log("New drug added at index:", newIndex);
+            
+            renderInventory();
+            loadDrug(newIndex);
+            
+            const inventoryEl = document.getElementById('inventory');
+            inventoryEl.scrollTop = inventoryEl.scrollHeight;
+            showToast('Duplicated — rename and save');
+        }
+
+        function createNewDrug() {
+            editingIndex = -1;
+            document.getElementById('drug-form').reset();
+            document.getElementById('formulations-container').innerHTML = '<span class="section-title" style="font-size: 0.7rem;">Formulations</span>';
+            document.getElementById('indications-container').innerHTML = '<span class="section-title" style="font-size: 0.7rem;">Indications</span>';
+            document.getElementById('brands-container').innerHTML = '<span class="section-title" style="font-size: 0.7rem;">Brands (BD Market)</span>';
+            addFormulation();
+            addIndication();
+            renderInventory();
+        }
+
+        function loadDrug(idx) {
+            editingIndex = idx;
+            const drug = drugData[idx];
+            document.getElementById('edit-name').value = drug.drugName;
+            document.getElementById('edit-min-days').value = drug.ageMinDays;
+            document.getElementById('edit-max-months').value = drug.ageMaxMonths;
+
+            document.getElementById('formulations-container').innerHTML = '<span class="section-title" style="font-size: 0.7rem;">Formulations</span>';
+            drug.formulations.forEach(f => addFormulation(f));
+
+            document.getElementById('indications-container').innerHTML = '<span class="section-title" style="font-size: 0.7rem;">Indications</span>';
+            drug.indications.forEach(i => addIndication(i));
+
+            document.getElementById('brands-container').innerHTML = '<span class="section-title" style="font-size: 0.7rem;">Brands (BD Market)</span>';
+            (drug.brands || []).forEach(b => addBrand(b));
+
+            clearUnsaved();
+            renderInventory();
+            document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function addBrand(data = {}) {
+            const container = document.getElementById('brands-container');
+            const div = document.createElement('div');
+            div.className = 'formulation-entry';
+            div.innerHTML = `
+                <div class="entry-header">
+                    <span class="hint">BRAND</span>
+                    <button type="button" class="btn sm danger" onclick="this.parentElement.parentElement.remove(); markUnsaved()">✕</button>
+                </div>
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <div class="form-group">
+                        <label>Brand Name</label>
+                        <input type="text" class="b-name" value="${data.name || ''}" placeholder="e.g. Napa">
+                    </div>
+                    <div class="form-group">
+                        <label>Manufacturer</label>
+                        <input type="text" class="b-mfr" value="${data.manufacturer || ''}" placeholder="e.g. Beximco">
+                    </div>
+                </div>
+                <div class="grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+                    <div class="form-group">
+                        <label>Form</label>
+                        <input type="text" class="b-form" list="list-types" value="${data.form || ''}" placeholder="syrup">
+                    </div>
+                    <div class="form-group">
+                        <label>Strength</label>
+                        <input type="text" class="b-strength" value="${data.strength || ''}" placeholder="120mg/5ml">
+                    </div>
+                    <div class="form-group">
+                        <label>Price (BDT)</label>
+                        <input type="text" class="b-price" value="${data.price || ''}" placeholder="৳45">
+                    </div>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function addFormulation(data = {}) {
+            const container = document.getElementById('formulations-container');
+            const div = document.createElement('div');
+            div.className = 'formulation-entry';
+            div.innerHTML = `
+                <div class="entry-header">
+                    <span class="hint">FORMULATION</span>
+                    <button type="button" class="btn sm danger" onclick="this.parentElement.parentElement.remove(); markUnsaved()">✕</button>
+                </div>
+                <div class="grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+                    <div class="form-group">
+                        <label>Type</label>
+                        <input type="text" class="f-type" list="list-types" value="${data.type || ''}" placeholder="syrup/tablet">
+                    </div>
+                    <div class="form-group">
+                        <label>Strength</label>
+                        <input type="text" class="f-strength" value="${data.strength || ''}" placeholder="250mg/5ml">
+                    </div>
+                    <div class="form-group">
+                        <label>Concentration</label>
+                        <input type="number" step="any" class="f-conc" value="${data.concentration || ''}" placeholder="mg/ml">
+                    </div>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function addIndication(data = {}) {
+            const container = document.getElementById('indications-container');
+            const div = document.createElement('div');
+            div.className = 'indication-entry';
+            div.innerHTML = `
+                <div class="entry-header">
+                    <span class="hint">INDICATION</span>
+                    <button type="button" class="btn sm danger" onclick="this.parentElement.parentElement.remove(); markUnsaved()">✕</button>
+                </div>
+                <div class="grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" class="i-label" list="list-labels" value="${data.label || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Dose</label>
+                        <input type="number" step="any" class="i-dose" value="${data.dose || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <input type="text" class="i-unit" list="list-units" value="${data.unit || 'mg/kg/dose'}">
+                    </div>
+                </div>
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <div class="form-group">
+                        <label>Frequency</label>
+                        <input type="text" class="i-freq" list="list-frequencies" value="${data.frequency || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Max Single Dose (mg)</label>
+                        <input type="number" class="i-max-s" value="${data.maxSingleDose || ''}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Max Daily Dose (mg)</label>
+                    <input type="number" class="i-max-d" value="${data.maxDailyDose || ''}">
+                </div>
+                <div class="form-group">
+                    <label>Note</label>
+                    <textarea class="i-note" rows="2">${data.note || ''}</textarea>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        document.getElementById('drug-form').onsubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('edit-name').value;
+            
+            // Duplication Guardrail
+            const existingIdx = drugData.findIndex(d => d.drugName.toLowerCase() === name.toLowerCase());
+            if (editingIndex === -1 && existingIdx !== -1) {
+                showToast('Drug already exists — editing that entry', 'warn');
+                loadDrug(existingIdx);
+                return;
+            }
+
+            const existingDrug = editingIndex === -1 ? {} : drugData[editingIndex];
+            const drug = {
+                ...existingDrug,
+                drugName: name,
+                ageMinDays: parseInt(document.getElementById('edit-min-days').value),
+                ageMaxMonths: parseInt(document.getElementById('edit-max-months').value),
+                formulations: [],
+                indications: [],
+                brands: []
+            };
+
+            document.querySelectorAll('.formulation-entry').forEach(el => {
+                drug.formulations.push({
+                    type: el.querySelector('.f-type').value,
+                    strength: el.querySelector('.f-strength').value,
+                    concentration: parseFloat(el.querySelector('.f-conc').value)
+                });
+            });
+
+            document.querySelectorAll('.indication-entry').forEach(el => {
+                drug.indications.push({
+                    label: el.querySelector('.i-label').value,
+                    dose: parseFloat(el.querySelector('.i-dose').value),
+                    unit: el.querySelector('.i-unit').value,
+                    frequency: el.querySelector('.i-freq').value,
+                    maxSingleDose: parseFloat(el.querySelector('.i-max-s').value) || null,
+                    maxDailyDose: parseFloat(el.querySelector('.i-max-d').value) || null,
+                    note: el.querySelector('.i-note').value
+                });
+            });
+
+            document.querySelectorAll('#brands-container .formulation-entry').forEach(el => {
+                const bName = el.querySelector('.b-name').value.trim();
+                if (!bName) return; // skip empty rows
+                drug.brands.push({
+                    name:         bName,
+                    manufacturer: el.querySelector('.b-mfr').value.trim(),
+                    form:         el.querySelector('.b-form').value.trim(),
+                    strength:     el.querySelector('.b-strength').value.trim(),
+                    price:        el.querySelector('.b-price').value.trim()
+                });
+            });
+
+            if (editingIndex === -1) {
+                drugData.push(drug);
+                editingIndex = drugData.length - 1;
+            } else {
+                drugData[editingIndex] = drug;
+            }
+
+            updateSuggestions();
+            renderInventory();
+            clearUnsaved();
+
+            // Pulse the save button
+            const btn = document.getElementById('btn-save');
+            btn.classList.remove('pulse');
+            void btn.offsetWidth; // reflow
+            btn.classList.add('pulse');
+            setTimeout(() => btn.classList.remove('pulse'), 600);
+
+            showToast('✓ Saved — export JSON to persist');
+        };
+
+        function deleteDrug(e, idx) {
+            e.stopPropagation();
+            if (confirm(`Delete "${drugData[idx].drugName}"?`)) {
+                drugData.splice(idx, 1);
+                editingIndex = -1;
+                createNewDrug();
+                showToast('Drug deleted', 'warn');
+            }
+        }
+
+        document.getElementById('search-db').oninput = (e) => renderInventory(e.target.value);
+
+        function exportData() {
+            document.getElementById('json-output').value = JSON.stringify(drugData, null, 2);
+            document.getElementById('export-modal').style.display = 'flex';
+        }
+
+        function closeExport() {
+            document.getElementById('export-modal').style.display = 'none';
+        }
+
+        function openImportModal() {
+            document.getElementById('import-input').value = '';
+            document.getElementById('import-modal').style.display = 'flex';
+        }
+
+        function closeImport() {
+            document.getElementById('import-modal').style.display = 'none';
+        }
+
+        function processImport() {
+            const input = document.getElementById('import-input').value.trim();
+            if (!input) return;
+
+            try {
+                let data = JSON.parse(input);
+
+                if (Array.isArray(data)) {
+                    const valid = data.filter(d => d.drugName && d.formulations && d.indications);
+                    valid.forEach(d => drugData.push(d));
+                    renderInventory();
+                    closeImport();
+                    showToast(`✓ Imported ${valid.length} drug${valid.length !== 1 ? 's' : ''}`);
+                } else {
+                    if (data.drugName) {
+                        drugData.push(data);
+                        const newIdx = drugData.length - 1;
+                        renderInventory();
+                        loadDrug(newIdx);
+                        closeImport();
+                        showToast('✓ Loaded into editor — review and save');
+                    } else {
+                        throw new Error('Invalid drug object structure.');
+                    }
+                }
+            } catch (err) {
+                showToast('Import error: ' + err.message, 'warn');
+            }
+        }
+
+        function copyJson() {
+            const text = document.getElementById('json-output').value;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => showToast('✓ JSON copied to clipboard'));
+            } else {
+                const ta = document.createElement('textarea');
+                ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+                document.body.appendChild(ta); ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('✓ JSON copied to clipboard');
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

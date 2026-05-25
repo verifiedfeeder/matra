@@ -145,9 +145,9 @@
             display: none;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
-
         #search-results.active {
             display: block;
+            animation: slideDown 0.15s ease-out;
         }
 
         /* Custom Scrollbar for search results */
@@ -224,6 +224,65 @@
             color: var(--warning-color);
         }
 
+        /* ── Toast ── */
+        #toast {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            background: var(--accent-color);
+            color: var(--bg-color);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 0.6rem 1.25rem;
+            z-index: 9999;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); }
+        #toast.error { background: var(--warning-color); }
+
+        /* ── New Patient button ── */
+        .btn-new-patient {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-new-patient:hover { border-color: var(--warning-color); color: var(--warning-color); }
+
+        /* ── Select enabled visual state ── */
+        select:not([disabled]) {
+            border-color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        /* ── Keyframes ── */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes entrySlide {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Result card ── */
         .result-card {
             border: 2px solid var(--accent-color);
             padding: 0;
@@ -231,9 +290,9 @@
             display: none;
             overflow: hidden;
         }
-
         .result-card.active {
             display: block;
+            animation: slideUp 0.25s ease-out;
         }
 
         .result-header {
@@ -424,9 +483,9 @@
             display: none;
             background: rgba(255, 127, 80, 0.05);
         }
-
         .warning-block.active {
             display: block;
+            animation: slideDown 0.2s ease-out;
         }
 
         select option {
@@ -448,19 +507,103 @@
             background: var(--accent-color);
         }
 
+        /* ── Loading skeleton ── */
+        .loading-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+        }
+        .loading-state .spinner {
+            width: 28px; height: 28px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── No-results message ── */
+        .no-results {
+            padding: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* ── Offline banner ── */
+        #offline-banner {
+            display: none;
+            background: var(--warning-color);
+            color: #000;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+        #offline-banner.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 480px) {
+            body { padding: 0; }
+
+            .container {
+                border-left: none;
+                border-right: none;
+                border-top: none;
+                padding: 1.25rem 1rem;
+            }
+
+            h1 { font-size: 1.2rem; }
+
+            /* Age inputs: 2×2 on small screens */
             .grid-inputs {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
             }
+
+            /* Bigger touch targets */
+            input, select {
+                padding: 0.9rem 0.75rem;
+                font-size: 1rem;
+            }
+
+            .search-item {
+                padding: 1rem 0.75rem;
+                font-size: 0.95rem;
+            }
+
+            .primary-value { font-size: 1.8rem; }
+
+            .info-grid { grid-template-columns: 1fr; gap: 1rem; }
+        }
+
+        @media (max-width: 360px) {
+            .grid-inputs { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+            h1 { font-size: 1rem; }
         }
     </style>
 </head>
+<div id="toast"></div>
 <body>
     <div class="container">
         <header>
             <h1>MATRA (মাত্রা)</h1>
-            <span class="version">v1.0.42</span>
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <button class="btn-new-patient" id="btn-new-patient" title="Clear all fields for next patient">↺ New Patient</button>
+                <span class="version">v1.0.42</span>
+            </div>
         </header>
+
+        <div id="offline-banner">⚡ OFFLINE MODE — Cached data in use</div>
 
         <section id="patient-data">
             <span class="section-title">01. Patient Data</span>
@@ -604,16 +747,38 @@
         };
 
         async function loadDatabase() {
+            // Show loading state
+            const patientSection = document.getElementById('patient-data');
+            const drugSection    = document.getElementById('drug-selection');
+            const loadEl = document.createElement('div');
+            loadEl.className = 'loading-state';
+            loadEl.id = 'db-loading';
+            loadEl.innerHTML = '<div class="spinner"></div><div>Loading drug database…</div>';
+            drugSection.prepend(loadEl);
+
             try {
                 const response = await fetch('drugs.json');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 drugData = await response.json();
-                
-                // Sort drugData alphabetically by drugName
                 drugData.sort((a, b) => a.drugName.localeCompare(b.drugName));
             } catch (error) {
                 console.error('Error loading drug database:', error);
-                elements.warningBox.textContent = "CRITICAL ERROR: Failed to load drug database.";
-                elements.warningBox.classList.add('active');
+                // Try cache fallback via SW
+                try {
+                    const cached = await caches.match('drugs.json');
+                    if (cached) {
+                        drugData = await cached.json();
+                        drugData.sort((a, b) => a.drugName.localeCompare(b.drugName));
+                        document.getElementById('offline-banner').classList.add('active');
+                    } else {
+                        throw new Error('No cache available');
+                    }
+                } catch {
+                    elements.warningBox.textContent = "CRITICAL ERROR: Failed to load drug database. Please go online and reload.";
+                    elements.warningBox.classList.add('active');
+                }
+            } finally {
+                document.getElementById('db-loading')?.remove();
             }
         }
 
@@ -623,10 +788,8 @@
             
             let filtered = [];
             if (!query) {
-                // If query is empty, show all drugs for scrolling
                 filtered = drugData.map((drug, index) => ({ drug, index }));
             } else {
-                // Filter based on drugName OR brand names
                 const q = query.toLowerCase();
                 filtered = drugData
                     .map((drug, index) => {
@@ -634,11 +797,8 @@
                         const matchingBrands = (drug.brands || [])
                             .filter(b => b.name.toLowerCase().includes(q))
                             .map(b => b.name);
-                        
                         return { 
-                            drug, 
-                            index, 
-                            matchesName, 
+                            drug, index, matchesName,
                             matchingBrand: matchingBrands.length > 0 ? matchingBrands[0] : null 
                         };
                     })
@@ -650,16 +810,21 @@
                     const div = document.createElement('div');
                     div.className = 'search-item';
                     div.id = `search-item-${i}`;
-                    
                     if (item.matchingBrand && !item.matchesName) {
                         div.innerHTML = `${item.drug.drugName} <span class="hint" style="color: var(--accent-color); font-size: 0.7rem; display: block;">Brand match: ${item.matchingBrand}</span>`;
                     } else {
                         div.textContent = item.drug.drugName;
                     }
-                    
                     div.addEventListener('click', () => selectDrug(item.index));
                     elements.searchResults.appendChild(div);
                 });
+                elements.searchResults.classList.add('active');
+            } else if (query) {
+                // Show no-results only when user has typed something
+                const noRes = document.createElement('div');
+                noRes.className = 'no-results';
+                noRes.textContent = `No drugs found for "${query}"`;
+                elements.searchResults.appendChild(noRes);
                 elements.searchResults.classList.add('active');
             } else {
                 elements.searchResults.classList.remove('active');
@@ -984,6 +1149,13 @@
 
         elements.drugSearch.addEventListener('keydown', (e) => {
             const items = elements.searchResults.querySelectorAll('.search-item');
+
+            if (e.key === 'Escape') {
+                elements.searchResults.classList.remove('active');
+                elements.drugSearch.blur();
+                return;
+            }
+
             if (!elements.searchResults.classList.contains('active') || items.length === 0) return;
 
             if (e.key === 'ArrowDown') {
@@ -1019,42 +1191,112 @@
             }
         });
 
-        [elements.indicationList, elements.formulationList, elements.ageY, elements.ageM, elements.ageW, elements.ageD, elements.weight].forEach(el => {
+        [elements.indicationList, elements.formulationList, elements.weight].forEach(el => {
+            el.addEventListener('input', calculateLogic);
+        });
+        // Age inputs trigger calculateLogic too (auto-advance handlers call input, which bubbles)
+        [elements.ageY, elements.ageM, elements.ageW, elements.ageD].forEach(el => {
+            el.addEventListener('change', calculateLogic);
             el.addEventListener('input', calculateLogic);
         });
 
-        elements.btnCopy.addEventListener('click', () => {
-            if (selectedDrugIndex === -1) return;
-            const drug = drugData[selectedDrugIndex].drugName;
-            const formulation = elements.formulationList.options[elements.formulationList.selectedIndex].text;
-            const ml = elements.resPractical.textContent;
-            const tsf = elements.resTsf.textContent.replace('(', '').replace(')', '');
-            const freq = elements.resFreq.textContent;
-            const ind = elements.resIndication.textContent;
+        // ── Toast ──────────────────────────────────────────────────
+        let toastTimer;
+        function showToast(msg, isError = false) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'show' + (isError ? ' error' : '');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { t.className = ''; }, 2200);
+        }
 
-            const text = `${drug.toUpperCase()} [${formulation}] | DOSE: ${ml} (${tsf}) | FREQ: ${freq} | INDICATION: ${ind}`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = elements.btnCopy.textContent;
-                elements.btnCopy.textContent = "COPIED!";
-                elements.btnCopy.style.background = "#FFFFFF";
-                setTimeout(() => {
-                    elements.btnCopy.textContent = originalText;
-                    elements.btnCopy.style.background = "var(--accent-color)";
-                }, 2000);
+        // ── Auto-advance age inputs ─────────────────────────────────
+        // maxLen: how many digits before auto-advancing
+        const ageFields = [
+            { el: elements.ageY, maxLen: 2, max: 18 },
+            { el: elements.ageM, maxLen: 2, max: 11 },
+            { el: elements.ageW, maxLen: 1, max:  4 },
+            { el: elements.ageD, maxLen: 2, max: 31 },
+        ];
+        ageFields.forEach(({ el, maxLen, max }, i) => {
+            el.addEventListener('input', () => {
+                const val = el.value;
+                // Clamp to max
+                if (parseInt(val) > max) el.value = max;
+                // Auto-advance only when digit count matches maxLen
+                if (val.length >= maxLen && i < ageFields.length - 1) {
+                    ageFields[i + 1].el.focus();
+                    ageFields[i + 1].el.select();
+                }
             });
         });
 
-        // Initialize
+        // ── New Patient ─────────────────────────────────────────────
+        document.getElementById('btn-new-patient').addEventListener('click', () => {
+            elements.ageY.value = '';
+            elements.ageM.value = '';
+            elements.ageW.value = '';
+            elements.ageD.value = '';
+            elements.weight.value = '';
+            elements.weightBadge.innerHTML = '';
+            elements.drugSearch.value = '';
+            elements.btnClear.classList.remove('active');
+            clearSearch();
+            elements.resultCard.classList.remove('active');
+            elements.warningBox.classList.remove('active');
+            elements.ageY.focus();
+            showToast('Ready for next patient');
+        });
+
+        // ── Copy with fallback ──────────────────────────────────────
+        elements.btnCopy.addEventListener('click', () => {
+            if (selectedDrugIndex === -1) return;
+            const drug        = drugData[selectedDrugIndex].drugName;
+            const formulation = elements.formulationList.options[elements.formulationList.selectedIndex].text;
+            const ml          = elements.resPractical.textContent;
+            const tsf         = elements.resTsf.textContent.replace('(', '').replace(')', '');
+            const freq        = elements.resFreq.textContent;
+            const ind         = elements.resIndication.textContent;
+            const text = `${drug.toUpperCase()} [${formulation}] | DOSE: ${ml} (${tsf}) | FREQ: ${freq} | INDICATION: ${ind}`;
+
+            const doSuccess = () => showToast('✓ Copied to clipboard');
+            const doFail    = () => showToast('Copy failed — select text manually', true);
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(doSuccess).catch(() => {
+                    // Fallback for HTTP / old Android
+                    try {
+                        const ta = document.createElement('textarea');
+                        ta.value = text;
+                        ta.style.cssText = 'position:fixed;opacity:0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(ta);
+                        doSuccess();
+                    } catch { doFail(); }
+                });
+            } else {
+                try {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.cssText = 'position:fixed;opacity:0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    doSuccess();
+                } catch { doFail(); }
+            }
+        });
+
+        // ── Initialize ──────────────────────────────────────────────
         loadDatabase();
 
-        // Register Service Worker for Offline Support
+        // Register Service Worker (once, idempotent)
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js')
-                    .then(reg => console.log('SW Registered', reg))
-                    .catch(err => console.log('SW Registration Failed', err));
-            });
+            navigator.serviceWorker.register('./service-worker.js')
+                .catch(err => console.warn('SW registration failed:', err));
         }
     </script>
 </body>
