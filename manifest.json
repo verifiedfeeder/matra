@@ -1,24 +1,30 @@
 {
   "short_name": "Matra",
-  "name": "Matra (মাত্রা) - Pediatric Dose Calculator",
+  "name": "Matra (মাত্রা) - Paediatric Dose Calculator",
+  "description": "High-precision paediatric drug dose calculator with clinical guardrails.",
   "icons": [
     {
-      "src": "icons/matra.ico",
-      "type": "image/x-icon",
-      "sizes": "16x16 32x32 48x48 64x64 128x128 256x256",
+      "src": "icons/matra-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "icons/matra.ico",
-      "type": "image/x-icon",
-      "sizes": "16x16 32x32 48x48 64x64 128x128 256x256",
+      "src": "icons/matra-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/matra-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
       "purpose": "maskable"
     }
   ],
   "start_url": "./index.html",
-  "background_color": "#121212",
-  "display": "standalone",
   "scope": "./",
-  "theme_color": "#CCFF00",
-  "description": "High-precision pediatric drug dose calculator with clinical guardrails."
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#CCFF00"
 }
