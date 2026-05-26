@@ -1,4 +1,4 @@
-const CACHE_NAME = 'matra-v1.2.0';
+const CACHE_NAME = 'matra-v1.3.0';
 
 // Assets that must be cached on install
 const PRECACHE_ASSETS = [
@@ -6,7 +6,8 @@ const PRECACHE_ASSETS = [
   './index.html',
   './drugs.json',
   './manifest.json',
-  './icons/matra.ico',
+  './icons/matra-192.png',
+  './icons/matra-512.png',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap'
 ];
 
@@ -60,6 +61,7 @@ self.addEventListener('fetch', (event) => {
     url.pathname.endsWith('.html')            ||
     url.pathname.endsWith('.css')             ||
     url.pathname.endsWith('.js')              ||
+    url.pathname.endsWith('.png')             ||
     url.pathname.endsWith('.ico')
   ) {
     event.respondWith(cacheFirst(event.request));
