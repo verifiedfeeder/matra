@@ -1,4 +1,4 @@
-const CACHE_NAME = 'matra-v1.4.0';
+const CACHE_NAME = 'matra-v1.4.2';
 const OFFLINE_URL = './offline.html';
 
 const PRECACHE_ASSETS = [
