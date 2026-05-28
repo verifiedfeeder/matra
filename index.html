@@ -139,7 +139,7 @@
             background: var(--surface-color);
             border: 1px solid var(--accent-color);
             border-top: none;
-            z-index: 100;
+            z-index: 1000;
             max-height: 300px;
             overflow-y: auto;
             display: none;
@@ -193,7 +193,7 @@
             color: var(--text-primary);
             padding: 0.75rem;
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 16px; /* Prevents iOS Safari auto-zoom on focus */
             width: 100%;
         }
 
@@ -488,6 +488,16 @@
             animation: slideDown 0.2s ease-out;
         }
 
+        select {
+            background-color: var(--surface-color);
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23A0A0A0' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            padding-right: 2.5rem;
+        }
+
         select option {
             background-color: var(--surface-color);
             color: var(--text-primary);
@@ -570,10 +580,10 @@
                 gap: 0.75rem;
             }
 
-            /* Bigger touch targets */
+            /* Keep 16px to prevent iOS zoom */
             input, select {
                 padding: 0.9rem 0.75rem;
-                font-size: 1rem;
+                font-size: 16px;
             }
 
             .search-item {
@@ -633,7 +643,10 @@
         /* ── Disclaimer modal ── */
         #disclaimer-overlay {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(0,0,0,0.92);
             z-index: 10000;
             display: flex;
@@ -645,9 +658,11 @@
         #disclaimer-box {
             background: var(--surface-color);
             border: 2px solid var(--warning-color);
-            padding: 2rem;
+            padding: 1.5rem;
             max-width: 500px;
             width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
             animation: slideUp 0.25s ease-out;
         }
         #disclaimer-box h2 {
@@ -697,6 +712,7 @@
         }
     </style>
 </head>
+<body>
 <div id="toast"></div>
 
 <!-- Disclaimer modal -->
@@ -724,7 +740,6 @@
     <span class="tip-close" id="ios-tip-close">Got it, don't show again</span>
 </div>
 
-<body>
     <div class="container">
         <header>
             <h1>MATRA (মাত্রা)</h1>
@@ -842,7 +857,7 @@
                 </div>
             </div>
         </section>
-    </div>
+    </div><!-- /.container -->
 
     <script>
         let drugData = [];
@@ -1317,11 +1332,27 @@
             });
         }
 
+        // Close dropdown — touch-safe version
+        // On mobile, mousedown fires before click and would close the dropdown
+        // before the item click registers. Use a flag to detect taps on items.
+        let selectingItem = false;
+
+        elements.searchResults.addEventListener('touchstart', () => {
+            selectingItem = true;
+        }, { passive: true });
+
         document.addEventListener('mousedown', (e) => {
+            if (selectingItem) { selectingItem = false; return; }
             if (!elements.drugSearch.contains(e.target) && !elements.searchResults.contains(e.target)) {
                 elements.searchResults.classList.remove('active');
             }
         });
+
+        document.addEventListener('touchstart', (e) => {
+            if (!elements.drugSearch.contains(e.target) && !elements.searchResults.contains(e.target)) {
+                elements.searchResults.classList.remove('active');
+            }
+        }, { passive: true });
 
         [elements.indicationList, elements.formulationList, elements.weight].forEach(el => {
             el.addEventListener('input', calculateLogic);
