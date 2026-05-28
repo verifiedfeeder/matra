@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATRA — Offline</title>
+    <style>
+        :root {
+            --bg: #121212;
+            --surface: #1E1E1E;
+            --accent: #CCFF00;
+            --text: #F5F5F5;
+            --muted: #A0A0A0;
+            --border: #333;
+            --mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--mono);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .card {
+            border: 2px solid var(--border);
+            background: var(--surface);
+            padding: 2rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        h1 {
+            font-size: 1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+        p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.6rem 1.5rem;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: transparent;
+            letter-spacing: 1px;
+        }
+        .btn:hover { background: var(--accent); color: var(--bg); }
+        .note {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">⚡</div>
+        <h1>You're Offline</h1>
+        <p>
+            MATRA requires a connection for its first load.<br>
+            Once loaded online, it works fully offline.
+        </p>
+        <button class="btn" onclick="window.location.reload()">Try Again</button>
+        <div class="note">
+            If you've used MATRA before on this device,<br>
+            try closing and reopening the app.
+        </div>
+    </div>
+</body>
+</html>

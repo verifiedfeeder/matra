@@ -1,13 +1,16 @@
-const CACHE_NAME = 'matra-v1.3.0';
+const CACHE_NAME = 'matra-v1.4.0';
+const OFFLINE_URL = './offline.html';
 
-// Assets that must be cached on install
 const PRECACHE_ASSETS = [
   './',
   './index.html',
+  './offline.html',
   './drugs.json',
   './manifest.json',
   './icons/matra-192.png',
   './icons/matra-512.png',
+  './screenshots/screenshot-mobile.png',
+  './screenshots/screenshot-desktop.png',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap'
 ];
 
@@ -16,12 +19,11 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      // addAll fails if any single asset fails — use individual puts to be resilient
       return Promise.allSettled(
         PRECACHE_ASSETS.map(url =>
           fetch(url).then(res => {
             if (res.ok) return cache.put(url, res);
-          }).catch(() => {/* font CDN may fail offline at first install — OK */})
+          }).catch(() => {})
         )
       );
     })
@@ -44,31 +46,47 @@ self.addEventListener('activate', (event) => {
 
 // ── Fetch: strategy depends on request type ───────────────────────
 self.addEventListener('fetch', (event) => {
+  // Skip non-GET and chrome-extension requests
+  if (event.request.method !== 'GET') return;
+  if (event.request.url.startsWith('chrome-extension://')) return;
+
   const url = new URL(event.request.url);
 
-  // drugs.json → Cache First, background revalidate (stale-while-revalidate)
+  // drugs.json → stale-while-revalidate (serve cached, update in background)
   if (url.pathname.endsWith('drugs.json')) {
     event.respondWith(staleWhileRevalidate(event.request));
     return;
   }
 
-  // Static assets (HTML, icons, manifest, fonts) → Cache First
+  // Navigation requests (HTML pages) → network first, offline fallback
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        caches.match(OFFLINE_URL) ||
+        caches.match('./index.html') ||
+        new Response('Offline', { status: 503 })
+      )
+    );
+    return;
+  }
+
+  // Static assets → Cache First
   if (
-    event.request.destination === 'document' ||
-    event.request.destination === 'font'     ||
-    event.request.destination === 'image'    ||
-    url.pathname.endsWith('.json')            ||
-    url.pathname.endsWith('.html')            ||
-    url.pathname.endsWith('.css')             ||
-    url.pathname.endsWith('.js')              ||
-    url.pathname.endsWith('.png')             ||
-    url.pathname.endsWith('.ico')
+    event.request.destination === 'font'  ||
+    event.request.destination === 'image' ||
+    url.pathname.endsWith('.json')  ||
+    url.pathname.endsWith('.html')  ||
+    url.pathname.endsWith('.css')   ||
+    url.pathname.endsWith('.js')    ||
+    url.pathname.endsWith('.png')   ||
+    url.pathname.endsWith('.ico')   ||
+    url.pathname.endsWith('.webp')
   ) {
     event.respondWith(cacheFirst(event.request));
     return;
   }
 
-  // Everything else → Network First with cache fallback
+  // Everything else → Network First
   event.respondWith(networkFirst(event.request));
 });
 
@@ -106,13 +124,9 @@ async function networkFirst(request) {
 async function staleWhileRevalidate(request) {
   const cache  = await caches.open(CACHE_NAME);
   const cached = await cache.match(request);
-
-  // Kick off a background fetch to refresh the cache
   const fetchPromise = fetch(request).then(response => {
     if (response.ok) cache.put(request, response.clone());
     return response;
   }).catch(() => null);
-
-  // Return cached immediately if available, else wait for network
   return cached || fetchPromise;
 }
